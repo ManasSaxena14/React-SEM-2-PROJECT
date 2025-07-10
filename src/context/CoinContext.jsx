@@ -60,9 +60,12 @@ const CoinContextProvider = (props) => {
     convertPortfolioCurrency(newCurrency);
   };
 
+  // Only load portfolio from localStorage once, and never overwrite with empty
   useEffect(() => {
-    const saved = localStorage.getItem('portfolio');
-    if (saved) setPortfolio(JSON.parse(saved));
+    if (portfolio.length === 0) {
+      const saved = localStorage.getItem('portfolio');
+      if (saved) setPortfolio(JSON.parse(saved));
+    }
   }, []);
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import { CoinContext } from '../../context/CoinContext';
 import './Portfolio.css';
 
 const Portfolio = () => {
-  const { allCoins, currency, portfolio, setPortfolio } = useContext(CoinContext);
+  const { allCoins, currency, portfolio, setPortfolio, error } = useContext(CoinContext);
   const [form, setForm] = useState({ coin: '', quantity: '', buyPrice: '' });
 
   useEffect(() => {
@@ -33,6 +33,29 @@ const Portfolio = () => {
   const totalValue = portfolio.reduce((sum, h) => sum + getCurrentPrice(h.coin) * h.quantity, 0);
   const totalCost = portfolio.reduce((sum, h) => sum + h.buyPrice * h.quantity, 0);
   const profitLoss = totalValue - totalCost;
+
+  if (error || allCoins.length === 0) {
+    return (
+      <div className="portfolio-container">
+        <h2 className="portfolio-title">Portfolio Tracker</h2>
+        <div style={{ textAlign: 'center', color: 'var(--danger)', fontWeight: 700, margin: '2rem 0' }}>
+          Unable to fetch cryptocurrency data. Please check your internet connection or try again later.<br/>
+          Your portfolio is stored locally and will reappear when data is available.
+        </div>
+      </div>
+    );
+  }
+
+  if (portfolio.length === 0) {
+    return (
+      <div className="portfolio-container">
+        <h2 className="portfolio-title">Portfolio Tracker</h2>
+        <div style={{ textAlign: 'center', color: 'var(--text-muted)', fontWeight: 700, margin: '2rem 0' }}>
+          Your portfolio is empty. Add coins to start tracking your profit and loss!
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="portfolio-container">
