@@ -60,11 +60,10 @@ const Home = () => {
       <div className="hero">
         <h1>
           CRYPTO <br />
-          X TRACKER
+          "X" TRACKER
         </h1>
         <p>
-          Welcome to CRYPTO X TRACKER — your all-in-one crypto command center.
-          Track live prices, dive into powerful insights, and analyze trends across thousands of digital assets — all in real time.
+          Welcome to CRYPTO X TRACKER — your all-in-one crypto command center. Track live prices, dive into powerful insights, and analyze trends across the top 15 digital assets — all in real time.
         </p>
         <form onSubmit={searchHandler}>
           <input
@@ -95,7 +94,7 @@ const Home = () => {
           <p className="market-cap">Market Cap</p>
         </div>
 
-        {displayCoins.slice(0, 10).map((coin) => (
+        {displayCoins.slice(0, 15).map((coin) => (
           <div className="table-layout" key={coin.id}>
             <p>{coin.market_cap_rank}</p>
             <div>
