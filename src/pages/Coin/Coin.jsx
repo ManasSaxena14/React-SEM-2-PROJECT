@@ -8,6 +8,7 @@ const Coin = () => {
   const { id: coinId } = useParams();
   const [coinData, setCoinData] = useState();
   const [historicalData, setHistoricalData] = useState();
+  const [error, setError] = useState(null);
   const { currency } = useContext(CoinContext);
 
   const fetchCoinData = async () => {
@@ -18,11 +19,14 @@ const Coin = () => {
         "x-cg-demo-api-key": "\tCG-VG4K5ie9paJGe4nPaB2jRNqm",
       },
     };
-
-    fetch(`https://api.coingecko.com/api/v3/coins/${coinId}`, options)
-      .then((res) => res.json())
-      .then((res) => setCoinData(res))
-      .catch((err) => console.error(err));
+    try {
+      const res = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}`, options);
+      if (!res.ok) throw new Error('Failed to fetch coin data');
+      const data = await res.json();
+      setCoinData(data);
+    } catch (err) {
+      setError('Failed to load coin data.');
+    }
   };
 
   const fetchHistoricalCoinData = async () => {
@@ -33,27 +37,39 @@ const Coin = () => {
         "x-cg-demo-api-key": "\tCG-VG4K5ie9paJGe4nPaB2jRNqm",
       },
     };
-
-    fetch(
-      `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency.name}&days=10&interval=daily`,
-      options
-    )
-      .then((res) => res.json())
-      .then((res) => setHistoricalData(res))
-      .catch((err) => console.error(err));
+    try {
+      const res = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency.name}&days=10&interval=daily`, options);
+      if (!res.ok) throw new Error('Failed to fetch historical data');
+      const data = await res.json();
+      setHistoricalData(data);
+    } catch (err) {
+      setError('Failed to load chart data.');
+    }
   };
 
   useEffect(() => {
+    setError(null);
     fetchCoinData();
     fetchHistoricalCoinData();
     // eslint-disable-next-line
-  }, [currency]);
+  }, [currency, coinId]);
 
-  if (coinData && historicalData) {
+  if (error) {
+    return (
+      <div className="coin">
+        <div className="hero">
+          <h1>Error</h1>
+          <p>{error}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (coinData && historicalData && coinData.market_data) {
     return (
       <div className="coin">
         <div className="coin-logo-center">
-          <img src={coinData.image.large} alt={coinData.name} className="coin-logo-img" />
+          <img src={coinData.image?.large} alt={coinData.name} className="coin-logo-img" />
         </div>
         <div className="coin-chart">
           <LineChart historicalData={historicalData} />
@@ -67,19 +83,19 @@ const Coin = () => {
               </tr>
               <tr>
                 <th>Current Price</th>
-                <td>{currency.symbol}{coinData.market_data.current_price[currency.name].toLocaleString()}</td>
+                <td>{currency.symbol}{coinData.market_data.current_price[currency.name]?.toLocaleString()}</td>
               </tr>
               <tr>
                 <th>Market Cap</th>
-                <td>{currency.symbol}{coinData.market_data.market_cap[currency.name].toLocaleString()}</td>
+                <td>{currency.symbol}{coinData.market_data.market_cap[currency.name]?.toLocaleString()}</td>
               </tr>
               <tr>
                 <th>24 Hour High</th>
-                <td>{currency.symbol}{coinData.market_data.high_24h[currency.name].toLocaleString()}</td>
+                <td>{currency.symbol}{coinData.market_data.high_24h[currency.name]?.toLocaleString()}</td>
               </tr>
               <tr>
                 <th>24 Hour Low</th>
-                <td>{currency.symbol}{coinData.market_data.low_24h[currency.name].toLocaleString()}</td>
+                <td>{currency.symbol}{coinData.market_data.low_24h[currency.name]?.toLocaleString()}</td>
               </tr>
             </tbody>
           </table>

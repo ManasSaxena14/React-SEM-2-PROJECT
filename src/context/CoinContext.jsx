@@ -24,28 +24,23 @@ const CoinContextProvider = (props) => {
   const fetchAllCoin = async () => {
     setLoading(true);
     setError(null);
-    
     try {
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-      },
-    };
-
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+        },
+      };
       const response = await fetch(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en`,
-      options
+        options
       );
-      
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
       const data = await response.json();
       setAllCoins(data);
     } catch (err) {
-      console.error("Error fetching coins:", err);
       setError(err.message);
       // Set some sample data for demo purposes
       setAllCoins([
