@@ -1,0 +1,124 @@
+.portfolio-container {
+  max-width: 900px;
+  margin: 60px auto 40px auto;
+  padding: 36px 20px 30px 20px;
+  background: var(--card);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+.portfolio-title {
+  text-align: center;
+  margin-bottom: 2.2rem;
+  font-size: 2.2rem;
+  color: var(--primary);
+  font-weight: 900;
+  text-shadow: 0 2px 16px #7929ff99, 0 1px 0 #fff;
+  letter-spacing: 1.5px;
+}
+.portfolio-form {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2.2rem;
+}
+.portfolio-form select,
+.portfolio-form input {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1.5px solid var(--primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: var(--bg-alt);
+  color: var(--text);
+}
+.portfolio-form button {
+  padding: 10px 28px;
+  border-radius: 8px;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 12px #7929ff33;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.portfolio-form button:hover {
+  background: var(--primary-dark);
+}
+.portfolio-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.8rem;
+  background: var(--bg-alt);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.portfolio-table th, .portfolio-table td {
+  padding: 14px 8px;
+  text-align: center;
+  font-weight: 800;
+  color: var(--text);
+  font-size: 1.08rem;
+}
+.portfolio-table th {
+  background: var(--card);
+  color: var(--primary);
+  font-weight: 900;
+  text-shadow: 0 2px 8px #7929ff44;
+}
+.portfolio-table tr:not(:last-child) {
+  border-bottom: 1.5px solid var(--border);
+}
+.remove-btn {
+  background: var(--danger);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 18px;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 1rem;
+  box-shadow: 0 2px 12px #ff464644;
+  transition: background 0.2s;
+}
+.remove-btn:hover {
+  background: #c82333;
+}
+.portfolio-summary {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  color: var(--text);
+  text-shadow: 0 2px 8px #3203a0cc;
+}
+.green {
+  color: var(--accent);
+  font-weight: 900;
+  text-shadow: 0 2px 8px #00d51544;
+}
+.red {
+  color: var(--danger);
+  font-weight: 900;
+  text-shadow: 0 2px 8px #ff464644;
+}
+@media (max-width: 700px) {
+  .portfolio-container {
+    padding: 10px 2vw;
+  }
+  .portfolio-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .portfolio-table th, .portfolio-table td {
+    padding: 8px 2px;
+    font-size: 0.98rem;
+  }
+  .portfolio-title {
+    font-size: 1.3rem;
+  }
+} 

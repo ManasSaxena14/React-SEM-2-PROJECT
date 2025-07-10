@@ -1,0 +1,102 @@
+:root {
+  --primary: #7929ff;
+  --primary-dark: #3203a0;
+  --accent: #00d515;
+  --danger: #ff4646;
+  --bg: #181a20;
+  --bg-alt: #23263a;
+  --text: #f5f6fa;
+  --text-muted: #bdbdbd;
+  --card: #23263a;
+  --border: #282b38;
+  --shadow: 0 2px 16px rgba(0,0,0,0.18);
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: 16px;
+  color-scheme: dark;
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 8px #3203a0cc;
+}
+
+p, li, th, td, label {
+  font-weight: 500;
+  color: var(--text);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.2s;
+}
+a:hover {
+  color: var(--accent);
+}
+
+button, .btn {
+  border-radius: 8px;
+  border: none;
+  padding: 0.7em 1.5em;
+  font-size: 1em;
+  font-weight: 700;
+  font-family: inherit;
+  background: var(--primary);
+  color: #fff;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+button:hover, .btn:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 4px 24px #7929ff44;
+}
+button:disabled, .btn:disabled {
+  background: var(--border);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+input, select, textarea {
+  background: var(--bg-alt);
+  color: var(--text);
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: 0.7em 1em;
+  font-size: 1em;
+  font-weight: 600;
+  outline: none;
+  transition: border 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+  border: 1.5px solid var(--primary);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: var(--bg-alt);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-dark);
+  border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+  html {
+    font-size: 15px;
+  }
+}
