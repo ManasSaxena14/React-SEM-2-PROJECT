@@ -46,58 +46,43 @@ const Coin = () => {
   useEffect(() => {
     fetchCoinData();
     fetchHistoricalCoinData();
+    // eslint-disable-next-line
   }, [currency]);
 
   if (coinData && historicalData) {
     return (
       <div className="coin">
-        <div className="coin-name">
-          <img src={coinData.image.large} alt="" />
-          <p>
-            <b>
-              {coinData.name} ({coinData.symbol.toUpperCase()})
-            </b>
-          </p>
+        <div className="coin-logo-center">
+          <img src={coinData.image.large} alt={coinData.name} className="coin-logo-img" />
         </div>
         <div className="coin-chart">
           <LineChart historicalData={historicalData} />
         </div>
-
-        <div className="coin-info">
-          <ul>
-            <li>Crypto Market Rank</li>
-            <li>{coinData.market_cap_rank}</li>
-          </ul>
-          <ul>
-            <li>Current price</li>
-            <li>
-              {currency.symbol}{" "}
-              {coinData.market_data.current_price[
-                currency.name
-              ].toLocaleString()}
-            </li>
-          </ul>
-          <ul>
-            <li>Market Cap</li>
-            <li>
-              {currency.symbol}{" "}
-              {coinData.market_data.market_cap[currency.name].toLocaleString()}
-            </li>
-          </ul>
-          <ul>
-            <li>24 Hour High</li>
-            <li>
-              {currency.symbol}{" "}
-              {coinData.market_data.high_24h[currency.name].toLocaleString()}
-            </li>
-          </ul>
-          <ul>
-            <li>24 Hour Low</li>
-            <li>
-              {currency.symbol}{" "}
-              {coinData.market_data.low_24h[currency.name].toLocaleString()}
-            </li>
-          </ul>
+        <div className="coin-table-section">
+          <table className="coin-info-table">
+            <tbody>
+              <tr>
+                <th>Crypto Market Rank</th>
+                <td>{coinData.market_cap_rank}</td>
+              </tr>
+              <tr>
+                <th>Current Price</th>
+                <td>{currency.symbol}{coinData.market_data.current_price[currency.name].toLocaleString()}</td>
+              </tr>
+              <tr>
+                <th>Market Cap</th>
+                <td>{currency.symbol}{coinData.market_data.market_cap[currency.name].toLocaleString()}</td>
+              </tr>
+              <tr>
+                <th>24 Hour High</th>
+                <td>{currency.symbol}{coinData.market_data.high_24h[currency.name].toLocaleString()}</td>
+              </tr>
+              <tr>
+                <th>24 Hour Low</th>
+                <td>{currency.symbol}{coinData.market_data.low_24h[currency.name].toLocaleString()}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     );
