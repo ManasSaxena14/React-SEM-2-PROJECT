@@ -11,6 +11,54 @@ const CoinContextProvider = (props) => {
     symbol: "$",
   });
   const [portfolio, setPortfolio] = useState([]);
+  const [exchangeRates, setExchangeRates] = useState({ usd: 1, eur: 1, inr: 1 });
+
+  // Fetch exchange rates (USD, EUR, INR)
+  const fetchExchangeRates = async () => {
+    try {
+      const res = await fetch(
+        'https://api.coingecko.com/api/v3/simple/price?ids=usd,eur,inr&vs_currencies=usd,eur,inr'
+      );
+      const data = await res.json();
+      // USD to others
+      setExchangeRates({
+        usd: 1,
+        eur: data.usd.eur,
+        inr: data.usd.inr,
+      });
+    } catch (err) {
+      // fallback: keep previous rates
+    }
+  };
+
+  // Convert all portfolio buyPrices to new currency
+  const convertPortfolioCurrency = (newCurrency) => {
+    setPortfolio((prevPortfolio) => {
+      return prevPortfolio.map((entry) => {
+        // If entry already has buyCurrency, convert
+        if (entry.buyCurrency && entry.buyCurrency !== newCurrency.name) {
+          // Convert buyPrice to USD first, then to new currency
+          let buyPriceInUSD = entry.buyPrice;
+          if (entry.buyCurrency === 'eur') buyPriceInUSD = entry.buyPrice / exchangeRates.eur;
+          if (entry.buyCurrency === 'inr') buyPriceInUSD = entry.buyPrice / exchangeRates.inr;
+          let newBuyPrice = buyPriceInUSD;
+          if (newCurrency.name === 'eur') newBuyPrice = buyPriceInUSD * exchangeRates.eur;
+          if (newCurrency.name === 'inr') newBuyPrice = buyPriceInUSD * exchangeRates.inr;
+          return { ...entry, buyPrice: parseFloat(newBuyPrice.toFixed(6)), buyCurrency: newCurrency.name };
+        } else if (!entry.buyCurrency) {
+          // If no buyCurrency, assume current context currency
+          return { ...entry, buyCurrency: newCurrency.name };
+        }
+        return entry;
+      });
+    });
+  };
+
+  // Patch setCurrency to also convert portfolio
+  const setCurrencyAndConvert = (newCurrency) => {
+    setCurrency(newCurrency);
+    convertPortfolioCurrency(newCurrency);
+  };
 
   useEffect(() => {
     const saved = localStorage.getItem('portfolio');
@@ -72,9 +120,11 @@ const CoinContextProvider = (props) => {
 
   useEffect(() => {
     fetchAllCoin();
-    // Add polling for live price updates
+    fetchExchangeRates();
+    // Add polling for live price updates and exchange rates
     const interval = setInterval(() => {
       fetchAllCoin();
+      fetchExchangeRates();
     }, 30000); // 30 seconds
     return () => clearInterval(interval);
   }, [currency]);
@@ -82,11 +132,12 @@ const CoinContextProvider = (props) => {
   const contextValue = {
     allCoins,
     currency,
-    setCurrency,
+    setCurrency: setCurrencyAndConvert,
     loading,
     error,
     portfolio,
     setPortfolio,
+    exchangeRates,
   };
 
   return (

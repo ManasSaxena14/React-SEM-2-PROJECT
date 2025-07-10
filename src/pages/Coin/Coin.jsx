@@ -75,7 +75,7 @@ const Coin = () => {
       if (!portfolioEntry) {
         setPortfolio([
           ...portfolio,
-          { coin: coinId, quantity: 1, buyPrice: currentPrice }
+          { coin: coinId, quantity: 1, buyPrice: currentPrice, buyCurrency: currency.name }
         ]);
       }
     };
@@ -104,7 +104,7 @@ const Coin = () => {
             <div className="coin-portfolio-info" style={{ background: 'var(--bg-alt)', borderRadius: 10, padding: '12px 24px', boxShadow: '0 2px 8px #7929ff22', display: 'flex', gap: 18, alignItems: 'center' }}>
               <span>In Portfolio:</span>
               <span>Qty: <b>{portfolioEntry.quantity}</b></span>
-              <span>Buy: <b>{currency.symbol}{portfolioEntry.buyPrice}</b></span>
+              <span>Buy: <b>{portfolioEntry.buyCurrency ? (portfolioEntry.buyCurrency === 'usd' ? '$' : portfolioEntry.buyCurrency === 'eur' ? '€' : '₹') : currency.symbol}{portfolioEntry.buyPrice}</b></span>
               <span>Value: <b>{currency.symbol}{value?.toFixed(2)}</b></span>
               <span>P/L: <b className={pl >= 0 ? 'green' : 'red'}>{currency.symbol}{pl?.toFixed(2)}</b></span>
             </div>

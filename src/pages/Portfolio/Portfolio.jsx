@@ -17,7 +17,7 @@ const Portfolio = () => {
   const handleAdd = (e) => {
     e.preventDefault();
     if (!form.coin || !form.quantity || !form.buyPrice) return;
-    setPortfolio([...portfolio, { ...form, quantity: parseFloat(form.quantity), buyPrice: parseFloat(form.buyPrice) }]);
+    setPortfolio([...portfolio, { ...form, quantity: parseFloat(form.quantity), buyPrice: parseFloat(form.buyPrice), buyCurrency: currency.name }]);
     setForm({ coin: '', quantity: '', buyPrice: '' });
   };
 
@@ -88,7 +88,7 @@ const Portfolio = () => {
               <tr key={idx}>
                 <td>{coinObj ? coinObj.name : h.coin}</td>
                 <td>{h.quantity}</td>
-                <td>{currency.symbol}{h.buyPrice}</td>
+                <td>{h.buyCurrency ? (h.buyCurrency === 'usd' ? '$' : h.buyCurrency === 'eur' ? '€' : '₹') : currency.symbol}{h.buyPrice}</td>
                 <td>{currency.symbol}{current}</td>
                 <td>{currency.symbol}{value.toFixed(2)}</td>
                 <td className={pl >= 0 ? 'green' : 'red'}>{currency.symbol}{pl.toFixed(2)}</td>

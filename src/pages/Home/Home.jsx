@@ -14,7 +14,7 @@ const Home = () => {
 
   const addToPortfolio = (coin) => {
     if (!portfolio.find((c) => c.coin === coin.id)) {
-      setPortfolio([...portfolio, { coin: coin.id, quantity: 1, buyPrice: coin.current_price }]);
+      setPortfolio([...portfolio, { coin: coin.id, quantity: 1, buyPrice: coin.current_price, buyCurrency: currency.name }]);
     }
   };
 
@@ -25,11 +25,11 @@ const Home = () => {
     }
   };
 
-  const searchHandler = async (e) => {
+  const searchHandler = (e) => {
     e.preventDefault();
-    const coins = await allCoins.filter((coin) => {
-      return coin.name.toLowerCase().includes(input.toLowerCase());
-    });
+    const coins = allCoins.filter((coin) =>
+      coin.name.toLowerCase().includes(input.toLowerCase())
+    );
     setDisplayCoins(coins);
   };
 
@@ -63,9 +63,8 @@ const Home = () => {
           X TRACKER
         </h1>
         <p>
-          Welcome to CRYPTO X TRACKER, your ultimate cryptocurrency price tracker, where you
-          can explore real-time market data and analyse trends across thousands
-          of digital assets.
+          Welcome to CRYPTO X TRACKER — your all-in-one crypto command center.
+          Track live prices, dive into powerful insights, and analyze trends across thousands of digital assets — all in real time.
         </p>
         <form onSubmit={searchHandler}>
           <input
@@ -78,14 +77,15 @@ const Home = () => {
           />
 
           <datalist id="coinlist">
-            {allCoins.map((coin, index) => (
-              <option key={index} value={coin.name} />
+            {allCoins.map((coin) => (
+              <option key={coin.id} value={coin.name} />
             ))}
           </datalist>
 
           <button type="submit">Search</button>
         </form>
       </div>
+
       <div className="crypto-table">
         <div className="table-layout">
           <p>#</p>
@@ -94,22 +94,24 @@ const Home = () => {
           <p style={{ textAlign: "center" }}>24H Change</p>
           <p className="market-cap">Market Cap</p>
         </div>
-        {displayCoins.slice(0, 10).map((coin, index) => (
-          <div className="table-layout" key={index}>
+
+        {displayCoins.slice(0, 10).map((coin) => (
+          <div className="table-layout" key={coin.id}>
             <p>{coin.market_cap_rank}</p>
             <div>
-              <Link to={`/coin/${coin.id}`} style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'inherit' }}>
-                <img src={coin.image} alt="" />
+              <Link
+                to={`/coin/${coin.id}`}
+                style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'inherit' }}
+              >
+                <img src={coin.image} alt={coin.name} />
                 <p>{coin.name + " - " + coin.symbol}</p>
               </Link>
             </div>
             <p>
               {currency.symbol} {coin.current_price.toLocaleString()}
             </p>
-            <p
-              className={coin.price_change_percentage_24h > 0 ? "green" : "red"}
-            >
-              {Math.floor(coin.price_change_percentage_24h * 100) / 100}
+            <p className={coin.price_change_percentage_24h > 0 ? "green" : "red"}>
+              {coin.price_change_percentage_24h.toFixed(2)}%
             </p>
             <p className="market-cap">
               {currency.symbol} {coin.market_cap.toLocaleString()}
