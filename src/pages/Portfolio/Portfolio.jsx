@@ -3,18 +3,17 @@ import { CoinContext } from '../../context/CoinContext';
 import './Portfolio.css';
 
 const Portfolio = () => {
-  const { allCoins, currency } = useContext(CoinContext);
-  const [holdings, setHoldings] = useState([]);
+  const { allCoins, currency, portfolio, setPortfolio } = useContext(CoinContext);
   const [form, setForm] = useState({ coin: '', quantity: '', buyPrice: '' });
 
   useEffect(() => {
     const saved = localStorage.getItem('portfolio');
-    if (saved) setHoldings(JSON.parse(saved));
+    if (saved) setPortfolio(JSON.parse(saved));
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('portfolio', JSON.stringify(holdings));
-  }, [holdings]);
+    localStorage.setItem('portfolio', JSON.stringify(portfolio));
+  }, [portfolio]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -23,12 +22,12 @@ const Portfolio = () => {
   const handleAdd = (e) => {
     e.preventDefault();
     if (!form.coin || !form.quantity || !form.buyPrice) return;
-    setHoldings([...holdings, { ...form, quantity: parseFloat(form.quantity), buyPrice: parseFloat(form.buyPrice) }]);
+    setPortfolio([...portfolio, { ...form, quantity: parseFloat(form.quantity), buyPrice: parseFloat(form.buyPrice) }]);
     setForm({ coin: '', quantity: '', buyPrice: '' });
   };
 
   const handleRemove = (idx) => {
-    setHoldings(holdings.filter((_, i) => i !== idx));
+    setPortfolio(portfolio.filter((_, i) => i !== idx));
   };
 
   const getCurrentPrice = (coinId) => {
@@ -36,8 +35,8 @@ const Portfolio = () => {
     return coin ? coin.current_price : 0;
   };
 
-  const totalValue = holdings.reduce((sum, h) => sum + getCurrentPrice(h.coin) * h.quantity, 0);
-  const totalCost = holdings.reduce((sum, h) => sum + h.buyPrice * h.quantity, 0);
+  const totalValue = portfolio.reduce((sum, h) => sum + getCurrentPrice(h.coin) * h.quantity, 0);
+  const totalCost = portfolio.reduce((sum, h) => sum + h.buyPrice * h.quantity, 0);
   const profitLoss = totalValue - totalCost;
 
   return (
@@ -85,7 +84,7 @@ const Portfolio = () => {
           </tr>
         </thead>
         <tbody>
-          {holdings.map((h, idx) => {
+          {portfolio.map((h, idx) => {
             const current = getCurrentPrice(h.coin);
             const value = current * h.quantity;
             const pl = value - h.buyPrice * h.quantity;

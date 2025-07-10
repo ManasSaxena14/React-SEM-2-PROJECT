@@ -10,6 +10,16 @@ const CoinContextProvider = (props) => {
     name: "usd",
     symbol: "$",
   });
+  const [portfolio, setPortfolio] = useState([]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('portfolio');
+    if (saved) setPortfolio(JSON.parse(saved));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('portfolio', JSON.stringify(portfolio));
+  }, [portfolio]);
 
   const fetchAllCoin = async () => {
     setLoading(true);
@@ -75,6 +85,8 @@ const CoinContextProvider = (props) => {
     setCurrency,
     loading,
     error,
+    portfolio,
+    setPortfolio,
   };
 
   return (

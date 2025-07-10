@@ -4,23 +4,13 @@ import { CoinContext } from "../../context/CoinContext";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const { allCoins, currency, loading, error } = useContext(CoinContext);
+  const { allCoins, currency, loading, error, portfolio, setPortfolio } = useContext(CoinContext);
   const [displayCoins, setDisplayCoins] = useState([]);
   const [input, setInput] = useState("");
-  const [portfolio, setPortfolio] = useState([]);
 
   useEffect(() => {
     setDisplayCoins(allCoins);
   }, [allCoins]);
-
-  useEffect(() => {
-    const saved = localStorage.getItem('portfolio');
-    if (saved) setPortfolio(JSON.parse(saved));
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('portfolio', JSON.stringify(portfolio));
-  }, [portfolio]);
 
   const addToPortfolio = (coin) => {
     if (!portfolio.find((c) => c.coin === coin.id)) {
@@ -108,8 +98,10 @@ const Home = () => {
           <div className="table-layout" key={index}>
             <p>{coin.market_cap_rank}</p>
             <div>
-              <img src={coin.image} alt="" />
-              <p>{coin.name + " - " + coin.symbol}</p>
+              <Link to={`/coin/${coin.id}`} style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'inherit' }}>
+                <img src={coin.image} alt="" />
+                <p>{coin.name + " - " + coin.symbol}</p>
+              </Link>
             </div>
             <p>
               {currency.symbol} {coin.current_price.toLocaleString()}
