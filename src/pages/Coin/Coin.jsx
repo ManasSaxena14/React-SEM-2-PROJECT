@@ -5,7 +5,7 @@ import { CoinContext } from "../../context/CoinContext";
 import LineChart from "../../components/LineChart/LineChart";
 
 const Coin = () => {
-  const { coinId } = useParams();
+  const { id: coinId } = useParams();
   const [coinData, setCoinData] = useState();
   const [historicalData, setHistoricalData] = useState();
   const { currency } = useContext(CoinContext);
