@@ -9,7 +9,7 @@ const Coin = () => {
   const [coinData, setCoinData] = useState();
   const [historicalData, setHistoricalData] = useState();
   const [error, setError] = useState(null);
-  const { currency } = useContext(CoinContext);
+  const { currency, portfolio, setPortfolio, allCoins } = useContext(CoinContext);
 
   const fetchCoinData = async () => {
     const options = {
@@ -66,10 +66,49 @@ const Coin = () => {
   }
 
   if (coinData && historicalData && coinData.market_data) {
+    // Check if this coin is in the portfolio
+    const portfolioEntry = portfolio.find((c) => c.coin === coinId);
+    // Get current price
+    const currentPrice = coinData.market_data.current_price[currency.name];
+    // Add to portfolio handler
+    const handleAddToPortfolio = () => {
+      if (!portfolioEntry) {
+        setPortfolio([
+          ...portfolio,
+          { coin: coinId, quantity: 1, buyPrice: currentPrice }
+        ]);
+      }
+    };
+    // Calculate P/L if in portfolio
+    let pl = null;
+    let value = null;
+    if (portfolioEntry) {
+      value = currentPrice * portfolioEntry.quantity;
+      pl = value - portfolioEntry.buyPrice * portfolioEntry.quantity;
+    }
     return (
       <div className="coin">
         <div className="coin-logo-center">
           <img src={coinData.image?.large} alt={coinData.name} className="coin-logo-img" />
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 24 }}>
+          {!portfolioEntry ? (
+            <button
+              className="portfolio-add-btn"
+              onClick={handleAddToPortfolio}
+              style={{ marginRight: 12 }}
+            >
+              Add to Portfolio
+            </button>
+          ) : (
+            <div className="coin-portfolio-info" style={{ background: 'var(--bg-alt)', borderRadius: 10, padding: '12px 24px', boxShadow: '0 2px 8px #7929ff22', display: 'flex', gap: 18, alignItems: 'center' }}>
+              <span>In Portfolio:</span>
+              <span>Qty: <b>{portfolioEntry.quantity}</b></span>
+              <span>Buy: <b>{currency.symbol}{portfolioEntry.buyPrice}</b></span>
+              <span>Value: <b>{currency.symbol}{value?.toFixed(2)}</b></span>
+              <span>P/L: <b className={pl >= 0 ? 'green' : 'red'}>{currency.symbol}{pl?.toFixed(2)}</b></span>
+            </div>
+          )}
         </div>
         <div className="coin-chart">
           <LineChart historicalData={historicalData} />
@@ -83,7 +122,7 @@ const Coin = () => {
               </tr>
               <tr>
                 <th>Current Price</th>
-                <td>{currency.symbol}{coinData.market_data.current_price[currency.name]?.toLocaleString()}</td>
+                <td>{currency.symbol}{currentPrice?.toLocaleString()}</td>
               </tr>
               <tr>
                 <th>Market Cap</th>
