@@ -72,6 +72,11 @@ const CoinContextProvider = (props) => {
 
   useEffect(() => {
     fetchAllCoin();
+    // Add polling for live price updates
+    const interval = setInterval(() => {
+      fetchAllCoin();
+    }, 30000); // 30 seconds
+    return () => clearInterval(interval);
   }, [currency]);
 
   const contextValue = {

@@ -7,11 +7,6 @@ const Portfolio = () => {
   const [form, setForm] = useState({ coin: '', quantity: '', buyPrice: '' });
 
   useEffect(() => {
-    const saved = localStorage.getItem('portfolio');
-    if (saved) setPortfolio(JSON.parse(saved));
-  }, []);
-
-  useEffect(() => {
     localStorage.setItem('portfolio', JSON.stringify(portfolio));
   }, [portfolio]);
 
