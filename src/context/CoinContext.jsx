@@ -83,7 +83,7 @@ const CoinContextProvider = (props) => {
         },
       };
       const response = await fetch(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en`,
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}&order=market_cap_desc&per_page=20&page=1&sparkline=false&locale=en`,
         options
       );
       if (!response.ok) {
@@ -114,10 +114,190 @@ const CoinContextProvider = (props) => {
           market_cap: 318000000000,
           market_cap_rank: 2,
           price_change_percentage_24h: -1.2
+        },
+        {
+          id: "tether",
+          name: "Tether",
+          symbol: "usdt",
+          image: "https://assets.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+          current_price: 1.0,
+          market_cap: 95000000000,
+          market_cap_rank: 3,
+          price_change_percentage_24h: 0.1
+        },
+        {
+          id: "binancecoin",
+          name: "BNB",
+          symbol: "bnb",
+          image: "https://assets.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
+          current_price: 315,
+          market_cap: 48000000000,
+          market_cap_rank: 4,
+          price_change_percentage_24h: 1.8
+        },
+        {
+          id: "solana",
+          name: "Solana",
+          symbol: "sol",
+          image: "https://assets.coingecko.com/coins/images/4128/large/solana.png?1696502016",
+          current_price: 98,
+          market_cap: 42000000000,
+          market_cap_rank: 5,
+          price_change_percentage_24h: 3.2
+        },
+        {
+          id: "usd-coin",
+          name: "USD Coin",
+          symbol: "usdc",
+          image: "https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png?1696502066",
+          current_price: 1.0,
+          market_cap: 32000000000,
+          market_cap_rank: 6,
+          price_change_percentage_24h: 0.0
+        },
+        {
+          id: "staked-ether",
+          name: "Lido Staked Ether",
+          symbol: "steth",
+          image: "https://assets.coingecko.com/coins/images/13442/large/steth_logo.png?1696513206",
+          current_price: 2650,
+          market_cap: 28000000000,
+          market_cap_rank: 7,
+          price_change_percentage_24h: -1.1
+        },
+        {
+          id: "cardano",
+          name: "Cardano",
+          symbol: "ada",
+          image: "https://assets.coingecko.com/coins/images/975/large/Cardano.png?1696502090",
+          current_price: 0.48,
+          market_cap: 17000000000,
+          market_cap_rank: 8,
+          price_change_percentage_24h: 2.1
+        },
+        {
+          id: "avalanche-2",
+          name: "Avalanche",
+          symbol: "avax",
+          image: "https://assets.coingecko.com/coins/images/12559/large/Avalanche_Circle_RedWhite_Trans.png?1696512169",
+          current_price: 35,
+          market_cap: 13000000000,
+          market_cap_rank: 9,
+          price_change_percentage_24h: 4.5
+        },
+        {
+          id: "dogecoin",
+          name: "Dogecoin",
+          symbol: "doge",
+          image: "https://assets.coingecko.com/coins/images/5/large/dogecoin.png?1696501409",
+          current_price: 0.085,
+          market_cap: 12000000000,
+          market_cap_rank: 10,
+          price_change_percentage_24h: 1.7
+        },
+        {
+          id: "tron",
+          name: "TRON",
+          symbol: "trx",
+          image: "https://assets.coingecko.com/coins/images/1094/large/tron-logo.png?1696502193",
+          current_price: 0.12,
+          market_cap: 11000000000,
+          market_cap_rank: 11,
+          price_change_percentage_24h: 0.8
+        },
+        {
+          id: "chainlink",
+          name: "Chainlink",
+          symbol: "link",
+          image: "https://assets.coingecko.com/coins/images/877/large/chainlink.png?1696502099",
+          current_price: 15.5,
+          market_cap: 9000000000,
+          market_cap_rank: 12,
+          price_change_percentage_24h: 2.3
+        },
+        {
+          id: "polkadot",
+          name: "Polkadot",
+          symbol: "dot",
+          image: "https://assets.coingecko.com/coins/images/12171/large/polkadot_new_logo.png?1696512162",
+          current_price: 7.2,
+          market_cap: 8500000000,
+          market_cap_rank: 13,
+          price_change_percentage_24h: 1.9
+        },
+        {
+          id: "matic-network",
+          name: "Polygon",
+          symbol: "matic",
+          image: "https://assets.coingecko.com/coins/images/4713/large/matic-token-icon.png?1696502297",
+          current_price: 0.85,
+          market_cap: 8000000000,
+          market_cap_rank: 14,
+          price_change_percentage_24h: 3.1
+        },
+        {
+          id: "toncoin",
+          name: "Toncoin",
+          symbol: "ton",
+          image: "https://assets.coingecko.com/coins/images/17980/large/ton_symbol.png?1696513780",
+          current_price: 2.1,
+          market_cap: 7500000000,
+          market_cap_rank: 15,
+          price_change_percentage_24h: 5.2
+        },
+        {
+          id: "wrapped-bitcoin",
+          name: "Wrapped Bitcoin",
+          symbol: "wbtc",
+          image: "https://assets.coingecko.com/coins/images/7598/large/wrapped_bitcoin_wbtc.png?1696507857",
+          current_price: 43250,
+          market_cap: 7000000000,
+          market_cap_rank: 16,
+          price_change_percentage_24h: 2.5
+        },
+        {
+          id: "shiba-inu",
+          name: "Shiba Inu",
+          symbol: "shib",
+          image: "https://assets.coingecko.com/coins/images/11939/large/shiba.png?1696512262",
+          current_price: 0.000012,
+          market_cap: 6500000000,
+          market_cap_rank: 17,
+          price_change_percentage_24h: 1.3
+        },
+        {
+          id: "dai",
+          name: "Dai",
+          symbol: "dai",
+          image: "https://assets.coingecko.com/coins/images/9956/large/4943.png?1696502031",
+          current_price: 1.0,
+          market_cap: 6000000000,
+          market_cap_rank: 18,
+          price_change_percentage_24h: 0.1
+        },
+        {
+          id: "litecoin",
+          name: "Litecoin",
+          symbol: "ltc",
+          image: "https://assets.coingecko.com/coins/images/2/large/litecoin.png?1696501400",
+          current_price: 68,
+          market_cap: 5500000000,
+          market_cap_rank: 19,
+          price_change_percentage_24h: 1.6
+        },
+        {
+          id: "uniswap",
+          name: "Uniswap",
+          symbol: "uni",
+          image: "https://assets.coingecko.com/coins/images/12504/large/uniswap-uni.png?1696512269",
+          current_price: 7.8,
+          market_cap: 5000000000,
+          market_cap_rank: 20,
+          price_change_percentage_24h: 2.8
         }
       ]);
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
   };
 

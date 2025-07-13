@@ -55,7 +55,7 @@ const Coin = () => {
   }, [currency, coinId]);
 
   if (error) {
-    return (
+  return (
       <div className="coin">
         <div className="hero">
           <h1>Error</h1>
@@ -145,8 +145,8 @@ const Coin = () => {
     return (
       <div className="spinner">
         <div className="spin"></div>
-      </div>
-    );
+    </div>
+  );
   }
 };
 export default Coin;

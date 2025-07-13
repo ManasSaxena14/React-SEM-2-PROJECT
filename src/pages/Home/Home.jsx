@@ -66,14 +66,14 @@ const Home = () => {
           Welcome to CRYPTO X TRACKER — your all-in-one crypto command center. Track live prices, dive into powerful insights, and analyze trends across the top 15 digital assets — all in real time.
         </p>
         <form onSubmit={searchHandler}>
-          <input
+        <input
             onChange={inputHandler}
             list="coinlist"
             value={input}
             type="text"
             placeholder="Search crypto..."
-            required
-          />
+          required
+        />
 
           <datalist id="coinlist">
             {allCoins.map((coin) => (
@@ -82,7 +82,7 @@ const Home = () => {
           </datalist>
 
           <button type="submit">Search</button>
-        </form>
+      </form>
       </div>
 
       <div className="crypto-table">
