@@ -4,7 +4,7 @@ import { CoinContext } from "../../context/CoinContext";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const { allCoins, currency, loading, error, portfolio, setPortfolio } = useContext(CoinContext);
+  const { allCoins, searchCoins, currency, loading, error, portfolio, setPortfolio } = useContext(CoinContext);
   const [displayCoins, setDisplayCoins] = useState([]);
   const [input, setInput] = useState("");
 
@@ -27,8 +27,9 @@ const Home = () => {
 
   const searchHandler = (e) => {
     e.preventDefault();
-    const coins = allCoins.filter((coin) =>
-      coin.name.toLowerCase().includes(input.toLowerCase())
+    const coins = searchCoins.filter((coin) =>
+      coin.name.toLowerCase().includes(input.toLowerCase()) ||
+      coin.symbol.toLowerCase().includes(input.toLowerCase())
     );
     setDisplayCoins(coins);
   };
@@ -76,7 +77,7 @@ const Home = () => {
         />
 
           <datalist id="coinlist">
-            {allCoins.map((coin) => (
+            {searchCoins.map((coin) => (
               <option key={coin.id} value={coin.name} />
             ))}
           </datalist>

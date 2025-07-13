@@ -4,6 +4,7 @@ export const CoinContext = createContext();
 
 const CoinContextProvider = (props) => {
   const [allCoins, setAllCoins] = useState([]);
+  const [searchCoins, setSearchCoins] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currency, setCurrency] = useState({
@@ -82,19 +83,31 @@ const CoinContextProvider = (props) => {
           accept: "application/json",
         },
       };
-      const response = await fetch(
+      
+      // Fetch top 20 coins for display
+      const top20Response = await fetch(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}&order=market_cap_desc&per_page=20&page=1&sparkline=false&locale=en`,
         options
       );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (!top20Response.ok) {
+        throw new Error(`HTTP error! status: ${top20Response.status}`);
       }
-      const data = await response.json();
-      setAllCoins(data);
+      const top20Data = await top20Response.json();
+      setAllCoins(top20Data);
+      
+      // Fetch all coins for search (up to 250 to avoid rate limits)
+      const searchResponse = await fetch(
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en`,
+        options
+      );
+      if (searchResponse.ok) {
+        const searchData = await searchResponse.json();
+        setSearchCoins(searchData);
+      }
     } catch (err) {
       setError(err.message);
       // Set some sample data for demo purposes
-      setAllCoins([
+      const sampleTop20 = [
         {
           id: "bitcoin",
           name: "Bitcoin",
@@ -295,7 +308,64 @@ const CoinContextProvider = (props) => {
           market_cap_rank: 20,
           price_change_percentage_24h: 2.8
         }
-      ]);
+      ];
+      
+      setAllCoins(sampleTop20);
+      // For search, include more sample coins
+      const extendedSample = [
+        ...sampleTop20,
+        {
+          id: "ripple",
+          name: "XRP",
+          symbol: "xrp",
+          image: "https://assets.coingecko.com/coins/images/44/large/xrp-symbol-white-128.png?1696501442",
+          current_price: 0.52,
+          market_cap: 28000000000,
+          market_cap_rank: 21,
+          price_change_percentage_24h: 1.4
+        },
+        {
+          id: "chainlink",
+          name: "Chainlink",
+          symbol: "link",
+          image: "https://assets.coingecko.com/coins/images/877/large/chainlink.png?1696502099",
+          current_price: 15.5,
+          market_cap: 9000000000,
+          market_cap_rank: 22,
+          price_change_percentage_24h: 2.3
+        },
+        {
+          id: "stellar",
+          name: "Stellar",
+          symbol: "xlm",
+          image: "https://assets.coingecko.com/coins/images/100/large/Stellar_symbol_black_RGB.png?1696501482",
+          current_price: 0.12,
+          market_cap: 3500000000,
+          market_cap_rank: 23,
+          price_change_percentage_24h: 0.8
+        },
+        {
+          id: "monero",
+          name: "Monero",
+          symbol: "xmr",
+          image: "https://assets.coingecko.com/coins/images/69/large/monero_logo.png?1696501460",
+          current_price: 165,
+          market_cap: 3000000000,
+          market_cap_rank: 24,
+          price_change_percentage_24h: 1.2
+        },
+        {
+          id: "ethereum-classic",
+          name: "Ethereum Classic",
+          symbol: "etc",
+          image: "https://assets.coingecko.com/coins/images/453/large/ethereum-classic-logo.png?1696501718",
+          current_price: 25,
+          market_cap: 2800000000,
+          market_cap_rank: 25,
+          price_change_percentage_24h: 0.9
+        }
+      ];
+      setSearchCoins(extendedSample);
     } finally {
         setLoading(false);
     }
@@ -314,6 +384,7 @@ const CoinContextProvider = (props) => {
 
   const contextValue = {
     allCoins,
+    searchCoins,
     currency,
     setCurrency: setCurrencyAndConvert,
     loading,

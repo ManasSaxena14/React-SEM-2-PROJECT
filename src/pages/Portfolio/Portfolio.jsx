@@ -3,7 +3,7 @@ import { CoinContext } from '../../context/CoinContext';
 import './Portfolio.css';
 
 const Portfolio = () => {
-  const { allCoins, currency, portfolio, setPortfolio, error } = useContext(CoinContext);
+  const { allCoins, searchCoins, currency, portfolio, setPortfolio, error } = useContext(CoinContext);
   const [form, setForm] = useState({ coin: '', quantity: '', buyPrice: '' });
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const Portfolio = () => {
       <form onSubmit={handleAdd} className="portfolio-form">
         <select name="coin" value={form.coin} onChange={handleChange} required>
           <option value="">Select Coin</option>
-          {allCoins.map((coin) => (
+          {searchCoins.map((coin) => (
             <option key={coin.id} value={coin.id}>{coin.name}</option>
           ))}
         </select>

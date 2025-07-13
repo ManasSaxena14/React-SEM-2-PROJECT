@@ -3,7 +3,8 @@
 A beginner-friendly cryptocurrency tracker built with React.js, Vite, and CoinGecko API.
 
 ## Features
-- Real-time prices of top 100 cryptocurrencies
+- Real-time prices of top 20 cryptocurrencies by market cap
+- Search functionality to find any cryptocurrency from the API
 - Portfolio tracker (manual entry, localStorage persistence)
 - Historical price chart per coin
 - Crypto to fiat/crypto converter
