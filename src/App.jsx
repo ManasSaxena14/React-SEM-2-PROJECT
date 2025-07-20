@@ -8,6 +8,7 @@ import Portfolio from './pages/Portfolio/Portfolio';
 import Coin from './pages/Coin/Coin';
 import About from './pages/About/About';
 import Blog from './pages/Blog/Blog';
+import Login from './pages/Login/Login';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/coin/:id" element={<Coin />} />
             <Route path="/about" element={<About />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </div>
         <Footer />

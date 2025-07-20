@@ -5,14 +5,14 @@ import { CoinContext } from "../../context/CoinContext";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const { setCurrency } = useContext(CoinContext);
+  const { setCurrency, user, isAuthenticated, logout } = useContext(CoinContext);
 
   const handleCurrencyChange = (e) => {
     switch (e.target.value) {
       case "usd":
         setCurrency({ name: "usd", symbol: "$" });
         break;
-      case "euro":
+      case "eur":
         setCurrency({ name: "eur", symbol: "€" });
         break;
       case "inr":
@@ -21,6 +21,12 @@ const Navbar = () => {
       default:
         setCurrency({ name: "usd", symbol: "$" });
         break;
+    }
+  };
+
+  const handleAuthClick = () => {
+    if (isAuthenticated) {
+      logout();
     }
   };
 
@@ -44,11 +50,20 @@ const Navbar = () => {
         </li>
       </ul>
       <div className="nav-actions">
-        <select onChange={handleCurrencyChange}>
+        <select onChange={handleCurrencyChange} className="currency-select">
           <option value="usd">USD</option>
-          <option value="euro">EUR</option>
+          <option value="eur">EUR</option>
           <option value="inr">INR</option>
         </select>
+        {isAuthenticated ? (
+          <button onClick={handleAuthClick} className="auth-btn logout-btn">
+            Logout
+          </button>
+        ) : (
+          <Link to="/login" className="auth-btn login-btn">
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );
