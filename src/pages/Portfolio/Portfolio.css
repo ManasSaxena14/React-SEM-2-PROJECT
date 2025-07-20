@@ -5,6 +5,7 @@
   background: var(--card);
   border-radius: 18px;
   box-shadow: var(--shadow);
+  overflow: hidden; /* Prevent content from going outside */
 }
 .portfolio-title {
   text-align: center;
@@ -22,6 +23,8 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 2.2rem;
+  width: 100%;
+  max-width: 100%;
 }
 .portfolio-form select,
 .portfolio-form input {
@@ -32,6 +35,9 @@
   font-weight: 700;
   background: var(--bg-alt);
   color: var(--text);
+  min-width: 120px;
+  flex: 1;
+  max-width: 200px;
 }
 .portfolio-form button {
   padding: 10px 28px;
@@ -44,6 +50,8 @@
   box-shadow: 0 2px 12px #7929ff33;
   cursor: pointer;
   transition: background 0.2s;
+  white-space: nowrap;
+  min-width: 80px;
 }
 .portfolio-form button:hover {
   background: var(--primary-dark);
@@ -108,17 +116,56 @@
 }
 @media (max-width: 700px) {
   .portfolio-container {
-    padding: 10px 2vw;
+    padding: 20px 15px;
+    margin: 40px 10px;
+    border-radius: 12px;
   }
   .portfolio-form {
     flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  .portfolio-form select,
+  .portfolio-form input {
+    width: 100%;
+    max-width: 100%;
+    min-width: unset;
+    flex: none;
+  }
+  .portfolio-form button {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+  .portfolio-table th, .portfolio-table td {
+    padding: 8px 4px;
+    font-size: 0.9rem;
+  }
+  .portfolio-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .portfolio-summary {
+    font-size: 1.1rem;
+  }
+}
+@media (max-width: 500px) {
+  .portfolio-container {
+    padding: 15px 10px;
+    margin: 20px 5px;
+  }
+  .portfolio-form {
     gap: 10px;
   }
   .portfolio-table th, .portfolio-table td {
-    padding: 8px 2px;
-    font-size: 0.98rem;
+    padding: 6px 2px;
+    font-size: 0.85rem;
   }
   .portfolio-title {
     font-size: 1.3rem;
+  }
+  .remove-btn {
+    padding: 5px 12px;
+    font-size: 0.9rem;
   }
 } 
