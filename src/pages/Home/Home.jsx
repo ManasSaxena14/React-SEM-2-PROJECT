@@ -45,17 +45,6 @@ const Home = () => {
     );
   }
 
-  if (error) {
-    return (
-      <div className="home">
-        <div className="hero">
-          <h1>Error Loading Data</h1>
-          <p>Unable to fetch cryptocurrency data. Using demo data instead.</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="home">
       <div className="hero">
@@ -66,6 +55,22 @@ const Home = () => {
         <p>
           Welcome to CRYPTO X TRACKER — your all-in-one crypto command center. Track live prices, dive into powerful insights, and analyze trends across the top 15 digital assets — all in real time.
         </p>
+        
+        {error && (
+          <div style={{ 
+            background: 'rgba(255, 70, 70, 0.1)', 
+            border: '1px solid var(--danger)', 
+            color: 'var(--danger)', 
+            padding: '12px 20px', 
+            borderRadius: '8px', 
+            marginBottom: '20px',
+            textAlign: 'center',
+            fontWeight: '600'
+          }}>
+            {error}
+          </div>
+        )}
+        
         <form onSubmit={searchHandler}>
         <input
             onChange={inputHandler}

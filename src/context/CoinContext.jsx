@@ -300,48 +300,77 @@ const CoinContextProvider = (props) => {
     setLoading(true);
     setError(null);
     
+    // Set a timeout for API calls to prevent hanging
+    const timeoutDuration = 10000; // 10 seconds
+    
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), timeoutDuration);
+      
       const options = {
         method: "GET",
         headers: {
           accept: "application/json",
         },
+        signal: controller.signal,
       };
       
-      // Fetch top 20 coins for display
+      // Try to fetch top 20 coins for display
       const top20Response = await fetch(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}&order=market_cap_desc&per_page=20&page=1&sparkline=false&locale=en`,
         options
       );
       
+      clearTimeout(timeoutId);
+      
       if (top20Response.ok) {
         const top20Data = await top20Response.json();
-        setAllCoins(top20Data);
         
-        // Fetch all coins for search (up to 250 to avoid rate limits)
-        const searchResponse = await fetch(
-          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en`,
-          options
-        );
-        
-        if (searchResponse.ok) {
-          const searchData = await searchResponse.json();
-          setSearchCoins(searchData);
+        // Validate that we got actual data
+        if (top20Data && Array.isArray(top20Data) && top20Data.length > 0) {
+          setAllCoins(top20Data);
+          
+          // Try to fetch search data
+          try {
+            const searchResponse = await fetch(
+              `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en`,
+              options
+            );
+            
+            if (searchResponse.ok) {
+              const searchData = await searchResponse.json();
+              if (searchData && Array.isArray(searchData) && searchData.length > 0) {
+                setSearchCoins(searchData);
+              } else {
+                setSearchCoins(top20Data);
+              }
+            } else {
+              setSearchCoins(top20Data);
+            }
+          } catch (searchErr) {
+            console.warn('Search API failed, using top 20:', searchErr);
+            setSearchCoins(top20Data);
+          }
         } else {
-          // If search fails, use top 20 for search too
-          setSearchCoins(top20Data);
+          throw new Error('Invalid data received from API');
         }
       } else {
         throw new Error(`API Error: ${top20Response.status}`);
       }
     } catch (err) {
       console.warn('API fetch failed, using sample data:', err);
-      setError('Using demo data due to API limitations. Real-time data will resume when available.');
       
-      // Use sample data with proper currency conversion
+      // Always use fallback data when API fails
       const sampleData = getSampleData(currency.name);
       setAllCoins(sampleData);
       setSearchCoins(sampleData);
+      
+      // Show user-friendly error message
+      if (err.name === 'AbortError') {
+        setError('API request timed out. Using demo data for now.');
+      } else {
+        setError('Unable to fetch live data. Using demo data instead.');
+      }
     } finally {
       setLoading(false);
     }

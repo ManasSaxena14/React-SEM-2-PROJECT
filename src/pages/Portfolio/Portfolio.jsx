@@ -34,13 +34,12 @@ const Portfolio = () => {
   const totalCost = portfolio.reduce((sum, h) => sum + h.buyPrice * h.quantity, 0);
   const profitLoss = totalValue - totalCost;
 
-  if (error || allCoins.length === 0) {
+  if (allCoins.length === 0) {
     return (
       <div className="portfolio-container">
         <h2 className="portfolio-title">Portfolio Tracker</h2>
         <div style={{ textAlign: 'center', color: 'var(--danger)', fontWeight: 700, margin: '2rem 0' }}>
-          Unable to fetch cryptocurrency data. Please check your internet connection or try again later.<br/>
-          Your portfolio is stored locally and will reappear when data is available.
+          Loading cryptocurrency data... Please wait.
         </div>
       </div>
     );
@@ -50,6 +49,20 @@ const Portfolio = () => {
     return (
       <div className="portfolio-container">
         <h2 className="portfolio-title">Portfolio Tracker</h2>
+        {error && (
+          <div style={{ 
+            background: 'rgba(255, 70, 70, 0.1)', 
+            border: '1px solid var(--danger)', 
+            color: 'var(--danger)', 
+            padding: '12px 20px', 
+            borderRadius: '8px', 
+            marginBottom: '20px',
+            textAlign: 'center',
+            fontWeight: '600'
+          }}>
+            {error}
+          </div>
+        )}
         <div style={{ textAlign: 'center', color: 'var(--text-muted)', fontWeight: 700, margin: '2rem 0' }}>
           Your portfolio is empty. Add coins to start tracking your profit and loss!
         </div>
@@ -60,6 +73,22 @@ const Portfolio = () => {
   return (
     <div className="portfolio-container">
       <h2 className="portfolio-title">Portfolio Tracker</h2>
+      
+      {error && (
+        <div style={{ 
+          background: 'rgba(255, 70, 70, 0.1)', 
+          border: '1px solid var(--danger)', 
+          color: 'var(--danger)', 
+          padding: '12px 20px', 
+          borderRadius: '8px', 
+          marginBottom: '20px',
+          textAlign: 'center',
+          fontWeight: '600'
+        }}>
+          {error}
+        </div>
+      )}
+      
       <form onSubmit={handleAdd} className="portfolio-form">
         <select name="coin" value={form.coin} onChange={handleChange} required>
           <option value="">Select Coin</option>
