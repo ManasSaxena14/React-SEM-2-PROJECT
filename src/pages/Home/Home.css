@@ -37,9 +37,10 @@ form {
   justify-content: space-between;
   align-items: center;
   box-shadow: var(--shadow);
+  flex-wrap: wrap;
 }
 form input {
-  flex: 1;
+  flex: 1 1 120px;
   font-size: 16px;
   outline: none;
   border: none;
@@ -47,6 +48,8 @@ form input {
   color: var(--text);
   background: transparent;
   font-weight: 700;
+  min-width: 0;
+  max-width: 100%;
 }
 form button {
   border: none;
@@ -58,18 +61,24 @@ form button {
   font-weight: 800;
   box-shadow: 0 2px 12px #7929ff33;
   transition: background 0.2s;
+  flex: 0 0 auto;
+  min-width: 80px;
+  max-width: 100%;
 }
 form button:hover {
   background: var(--primary-dark);
 }
 .crypto-table {
-  margin: auto;
+  margin: 0 auto;
   max-width: 800px;
   background: var(--card);
   border-radius: 15px;
   box-shadow: var(--shadow);
   overflow-x: auto;
   overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .table-layout {
   display: grid;
@@ -133,6 +142,19 @@ form button:hover {
   }
 }
 @media (max-width: 500px) {
+  form {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    min-width: 0;
+    padding: 6px 2px;
+  }
+  form input, form button {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
   .crypto-table {
     border-radius: 10px;
     margin: 20px 0 0 0;

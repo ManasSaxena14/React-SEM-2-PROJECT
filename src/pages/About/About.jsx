@@ -3,6 +3,11 @@ import './About.css';
 const About = () => {
   return (
     <div className="about-container">
+      <img
+        src="https://img.freepik.com/premium-photo/bitcoin-digital-concept_828075-3663.jpg"
+        alt="Bitcoin digital concept hero"
+        className="about-hero-img"
+      />
       <h1>About CRYPTO "X" PULSE</h1>
 
       <p className="intro">
@@ -10,6 +15,14 @@ const About = () => {
         We provide real-time data, comprehensive market coverage, and an intuitive interface
         to help you stay ahead in your investment journey.
       </p>
+
+      <div className="about-crypto-icons">
+        <img src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400" alt="Bitcoin" />
+        <img src="https://assets.coingecko.com/coins/images/279/large/ethereum.png?1696501628" alt="Ethereum" />
+        <img src="https://assets.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970" alt="BNB" />
+        <img src="https://assets.coingecko.com/coins/images/4128/large/solana.png?1696502016" alt="Solana" />
+        <img src="https://assets.coingecko.com/coins/images/325/large/Tether.png?1696501661" alt="Tether" />
+      </div>
 
       <section className="features-section">
         <h2>Key Features</h2>

@@ -4,6 +4,10 @@ import './Blog.css';
 const Blog = () => {
   return (
     <div className="blog-container">
+      <div className="blog-hero-images">
+        <img src="https://images.unsplash.com/photo-1640161704729-cbe966a08476?q=80&w=2344&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Crypto concept 1" className="blog-hero-img" />
+        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Crypto concept 2" className="blog-hero-img" />
+      </div>
       <h1>📚 Beginner Guides & Tutorials</h1>
       <p>
         Whether you're new to crypto or brushing up your skills, our tutorials walk you through the fundamentals and latest market trends in simple language.
