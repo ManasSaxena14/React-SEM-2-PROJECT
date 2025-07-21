@@ -34,6 +34,12 @@
   border: none;
   cursor: pointer;
   z-index: 1100;
+  color: #fff;
+  transition: background 0.2s;
+}
+.hamburger:focus, .hamburger:hover {
+  background: var(--primary-dark);
+  outline: 2px solid var(--accent);
 }
 .hamburger-bar {
   width: 28px;
