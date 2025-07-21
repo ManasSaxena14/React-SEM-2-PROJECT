@@ -121,13 +121,6 @@ const Home = () => {
             <p className="market-cap">
               {currency.symbol} {coin.market_cap.toLocaleString()}
             </p>
-            <button
-              className="portfolio-add-btn"
-              onClick={() => addToPortfolio(coin)}
-              disabled={portfolio.find((c) => c.coin === coin.id)}
-            >
-              {portfolio.find((c) => c.coin === coin.id) ? 'Added' : 'Add to Portfolio'}
-            </button>
           </div>
         ))}
       </div>
