@@ -84,3 +84,12 @@
     padding: 8px 8px;
   }
 }
+@media (max-width: 400px) {
+  .about-container {
+    padding: 6px 1vw;
+  }
+  .features-list li {
+    font-size: 0.85rem;
+    padding: 6px 4px;
+  }
+}

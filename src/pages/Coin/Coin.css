@@ -203,4 +203,22 @@
     padding: 10px 8px;
     font-size: 0.98rem;
   }
+}
+@media (max-width: 400px) {
+  .coin-info-table {
+    overflow-x: auto;
+    border-radius: 8px;
+    min-width: 320px;
+  }
+  .coin-info-table th, .coin-info-table td {
+    min-width: 90px;
+    font-size: 0.8rem;
+    padding: 6px 2px;
+  }
+  .coin-portfolio-info {
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 4px;
+    font-size: 0.9rem;
+  }
 } 

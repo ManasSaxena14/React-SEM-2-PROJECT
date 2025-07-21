@@ -167,4 +167,20 @@ form button:hover {
     font-size: 1rem;
     padding: 6px;
   }
+}
+@media (max-width: 500px) {
+  .crypto-table {
+    overflow-x: auto;
+    border-radius: 8px;
+    margin: 10px 0 0 0;
+  }
+  .table-layout {
+    min-width: 600px;
+    font-size: 0.85rem;
+    padding: 8px 2px;
+  }
+  .portfolio-add-btn {
+    padding: 8px 12px;
+    font-size: 0.95rem;
+  }
 } 

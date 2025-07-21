@@ -168,4 +168,19 @@
     padding: 5px 12px;
     font-size: 0.9rem;
   }
+}
+@media (max-width: 400px) {
+  .portfolio-table {
+    overflow-x: auto;
+    border-radius: 8px;
+  }
+  .portfolio-table th, .portfolio-table td {
+    min-width: 80px;
+    font-size: 0.8rem;
+    padding: 4px 2px;
+  }
+  .remove-btn {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+  }
 } 
