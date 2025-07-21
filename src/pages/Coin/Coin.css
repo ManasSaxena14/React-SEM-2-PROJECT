@@ -221,4 +221,26 @@
     padding: 8px 4px;
     font-size: 0.9rem;
   }
+}
+@media (max-width: 375px) {
+  .coin-info-table {
+    min-width: 220px;
+    font-size: 0.7rem;
+  }
+  .coin-info-table th, .coin-info-table td {
+    min-width: 60px;
+    font-size: 0.7rem;
+    padding: 4px 1px;
+  }
+  .portfolio-add-btn {
+    padding: 6px 8px;
+    font-size: 0.8rem;
+    min-width: 60px;
+    margin-left: 4px;
+  }
+  .coin-portfolio-info {
+    font-size: 0.8rem;
+    gap: 2px;
+    padding: 6px 2px;
+  }
 } 
