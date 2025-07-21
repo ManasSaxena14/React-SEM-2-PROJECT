@@ -58,10 +58,8 @@ const Home = () => {
           CRYPTO <br />
           "X" TRACKER
         </h1>
-        <p>
-          Welcome to CRYPTO X TRACKER — your all-in-one crypto command center.<br/>
-          Track live prices, dive into powerful insights, and analyze trends across the top 15 digital assets — all in real time.<br/>
-          Discover curated market data, understand token performance, and build your own portfolio with precision. Whether you're a curious beginner or a seasoned trader, CRYPTO X TRACKER gives you the edge to navigate the crypto space confidently — all in one sleek, lightning-fast dashboard.
+        <p className="hero-welcome" style={{ textAlign: 'center' }}>
+          Welcome to CRYPTO X TRACKER — your all in one crypto command center where you can track real-time prices, monitor market trends, and analyze the top 15 digital assets with ease. From powerful insights and curated data to personalized portfolio tools and an intuitive interface, this platform empowers both beginners and experienced traders to stay ahead in the fast-moving world of cryptocurrencies — all through one sleek, responsive dashboard.
         </p>
         
         {error && (
