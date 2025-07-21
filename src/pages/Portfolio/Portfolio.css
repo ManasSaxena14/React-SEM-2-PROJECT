@@ -5,7 +5,6 @@
   background: var(--card);
   border-radius: 18px;
   box-shadow: var(--shadow);
-  overflow: hidden; /* Prevent content from going outside */
 }
 .portfolio-title {
   text-align: center;
