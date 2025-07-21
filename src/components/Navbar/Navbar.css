@@ -30,24 +30,27 @@
   align-items: center;
   width: 40px;
   height: 40px;
-  background: none;
+  background: var(--primary);
   border: none;
+  border-radius: 8px;
   cursor: pointer;
   z-index: 1100;
   color: #fff;
   transition: background 0.2s;
+  box-shadow: 0 2px 8px #7929ff33;
 }
 .hamburger:focus, .hamburger:hover {
   background: var(--primary-dark);
   outline: 2px solid var(--accent);
 }
 .hamburger-bar {
-  width: 28px;
-  height: 3px;
+  width: 26px;
+  height: 4px;
   background: #fff;
-  margin: 3px 0;
+  margin: 4px 0;
   border-radius: 2px;
   transition: all 0.3s;
+  display: block;
 }
 
 .nav-links {
