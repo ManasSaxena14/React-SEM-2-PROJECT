@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./Navbar.css";
 import logo from "../../assets/logo.png";
 import { CoinContext } from "../../context/CoinContext";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const { setCurrency, user, isAuthenticated, logout } = useContext(CoinContext);
+  const { setCurrency, isAuthenticated, logout } = useContext(CoinContext);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleCurrencyChange = (e) => {
     switch (e.target.value) {
@@ -30,27 +31,45 @@ const Navbar = () => {
     }
   };
 
+  const handleHamburger = () => {
+    setMenuOpen((prev) => !prev);
+  };
+
+  const closeMenu = () => setMenuOpen(false);
+
   return (
-    <div className="navbar">
-      <Link to="/">
-        <img src={logo} alt="logo" className="logo" />
-      </Link>
-      <ul className="nav-links">
+    <nav className="navbar">
+      <div className="navbar-section navbar-left">
+        <Link to="/" onClick={closeMenu}>
+          <img src={logo} alt="logo" className="logo" />
+        </Link>
+      </div>
+      <button
+        className="hamburger"
+        aria-label="Toggle navigation menu"
+        aria-expanded={menuOpen}
+        onClick={handleHamburger}
+      >
+        <span className="hamburger-bar"></span>
+        <span className="hamburger-bar"></span>
+        <span className="hamburger-bar"></span>
+      </button>
+      <ul className={`nav-links${menuOpen ? " open" : ""}`}>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/" onClick={closeMenu}>Home</Link>
         </li>
         <li>
-          <Link to="/about">About</Link>
+          <Link to="/about" onClick={closeMenu}>About</Link>
         </li>
         <li>
-          <Link to="/portfolio">Portfolio</Link>
+          <Link to="/portfolio" onClick={closeMenu}>Portfolio</Link>
         </li>
         <li>
-          <Link to="/blog">Blog</Link>
+          <Link to="/blog" onClick={closeMenu}>Blog</Link>
         </li>
       </ul>
       <div className="nav-actions">
-        <select onChange={handleCurrencyChange} className="currency-select">
+        <select onChange={handleCurrencyChange} className="currency-select" aria-label="Select currency">
           <option value="usd">USD</option>
           <option value="eur">EUR</option>
           <option value="inr">INR</option>
@@ -60,12 +79,12 @@ const Navbar = () => {
             Logout
           </button>
         ) : (
-          <Link to="/login" className="auth-btn login-btn">
+          <Link to="/login" className="auth-btn login-btn" onClick={closeMenu}>
             Login
           </Link>
         )}
       </div>
-    </div>
+    </nav>
   );
 };
 
