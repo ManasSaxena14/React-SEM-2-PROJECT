@@ -203,7 +203,7 @@
     padding: 10px 8px;
     font-size: 0.98rem;
   }
-}
+} 
 @media (max-width: 400px) {
   .coin-info-table {
     overflow-x: auto;

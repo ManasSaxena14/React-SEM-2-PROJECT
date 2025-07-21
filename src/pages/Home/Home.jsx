@@ -34,6 +34,12 @@ const Home = () => {
     setDisplayCoins(coins);
   };
 
+  const formatMarketCap = (num) => {
+    if (num >= 1e9) return (num / 1e9).toFixed(2) + 'B';
+    if (num >= 1e6) return (num / 1e6).toFixed(2) + 'M';
+    return num.toLocaleString();
+  };
+
   if (loading) {
     return (
       <div className="home">
@@ -119,7 +125,7 @@ const Home = () => {
               {coin.price_change_percentage_24h.toFixed(2)}%
             </p>
             <p className="market-cap">
-              {currency.symbol} {coin.market_cap.toLocaleString()}
+              {currency.symbol} {formatMarketCap(coin.market_cap)}
             </p>
           </div>
         ))}

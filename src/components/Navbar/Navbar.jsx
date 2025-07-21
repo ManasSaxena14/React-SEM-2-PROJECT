@@ -1,12 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./Navbar.css";
 import logo from "../../assets/logo.png";
 import { CoinContext } from "../../context/CoinContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const { setCurrency, isAuthenticated, logout } = useContext(CoinContext);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleCurrencyChange = (e) => {
     switch (e.target.value) {
@@ -31,43 +32,43 @@ const Navbar = () => {
     }
   };
 
-  const handleHamburger = () => {
-    setMenuOpen((prev) => !prev);
+  const handleNavDropdown = (e) => {
+    if (e.target.value) navigate(e.target.value);
   };
-
-  const closeMenu = () => setMenuOpen(false);
 
   return (
     <nav className="navbar">
       <div className="navbar-section navbar-left">
-        <Link to="/" onClick={closeMenu}>
+        <Link to="/">
           <img src={logo} alt="logo" className="logo" />
         </Link>
       </div>
-      <button
-        className="hamburger"
-        aria-label="Toggle navigation menu"
-        aria-expanded={menuOpen}
-        onClick={handleHamburger}
-      >
-        <span className="hamburger-bar"></span>
-        <span className="hamburger-bar"></span>
-        <span className="hamburger-bar"></span>
-      </button>
-      <ul className={`nav-links${menuOpen ? " open" : ""}`}>
+      <ul className="nav-links">
         <li>
-          <Link to="/" onClick={closeMenu}>Home</Link>
+          <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/about" onClick={closeMenu}>About</Link>
+          <Link to="/about">About</Link>
         </li>
         <li>
-          <Link to="/portfolio" onClick={closeMenu}>Portfolio</Link>
+          <Link to="/portfolio">Portfolio</Link>
         </li>
         <li>
-          <Link to="/blog" onClick={closeMenu}>Blog</Link>
+          <Link to="/blog">Blog</Link>
         </li>
       </ul>
+      <select
+        className="nav-dropdown"
+        aria-label="Navigate"
+        value={['/', '/about', '/portfolio', '/blog'].includes(location.pathname) ? location.pathname : ''}
+        onChange={handleNavDropdown}
+      >
+        <option value="">Navigate...</option>
+        <option value="/">Home</option>
+        <option value="/about">About</option>
+        <option value="/portfolio">Portfolio</option>
+        <option value="/blog">Blog</option>
+      </select>
       <div className="nav-actions">
         <select onChange={handleCurrencyChange} className="currency-select" aria-label="Select currency">
           <option value="usd">USD</option>
@@ -79,7 +80,7 @@ const Navbar = () => {
             Logout
           </button>
         ) : (
-          <Link to="/login" className="auth-btn login-btn" onClick={closeMenu}>
+          <Link to="/login" className="auth-btn login-btn">
             Login
           </Link>
         )}

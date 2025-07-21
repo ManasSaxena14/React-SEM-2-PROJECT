@@ -76,7 +76,7 @@ form button:hover {
   grid-template-columns: 0.5fr 2fr 1fr 1fr 1.5fr;
   padding: 15px 20px;
   align-items: center;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 2px solid var(--border);
   font-weight: 700;
   color: var(--text);
   font-size: 1.08rem;
@@ -84,22 +84,29 @@ form button:hover {
   min-width: 600px;
   white-space: nowrap;
 }
-.market-cap {
-  text-align: right;
-}
 .table-layout:last-child {
-  border: none;
+  border-bottom: none;
 }
 .table-layout > p, .table-layout > div {
   display: flex;
   align-items: center;
   gap: 10px;
   justify-content: flex-start;
+  min-width: 60px;
+  white-space: nowrap;
 }
 .table-layout div img {
   width: 35px;
   border-radius: 50%;
   box-shadow: 0 2px 8px #7929ff33;
+}
+.market-cap {
+  text-align: right;
+  min-width: 90px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 .green {
   color: var(--accent);
@@ -119,22 +126,10 @@ form button:hover {
     grid-template-columns: 0.5fr 3fr 1fr 1fr 1.5fr;
     font-size: 0.98rem;
     padding: 12px 6px;
-    min-width: 600px;
+    min-width: 520px;
   }
   .market-cap {
-    min-width: 100px;
-    white-space: nowrap;
-    text-align: right;
-  }
-}
-@media (max-width: 700px) {
-  .table-layout {
-    min-width: 700px;
-  }
-  .market-cap {
-    min-width: 120px;
-    white-space: nowrap;
-    text-align: right;
+    min-width: 80px;
   }
 }
 @media (max-width: 500px) {
@@ -145,32 +140,32 @@ form button:hover {
   }
   .table-layout {
     font-size: 12px;
-    min-width: 700px;
+    min-width: 420px;
     padding: 6px 1px;
   }
   .table-layout div img {
     width: 20px;
   }
   .market-cap {
-    min-width: 100px;
-    white-space: nowrap;
-    text-align: right;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    min-width: 60px;
+    font-size: 11px;
+  }
+  .table-layout > p:first-child,
+  .table-layout > div:first-of-type {
+    gap: 2px;
   }
 }
 @media (max-width: 375px) {
   .table-layout {
     font-size: 10px;
-    min-width: 700px;
+    min-width: 340px;
     padding: 4px 1px;
   }
   .table-layout div img {
     width: 16px;
   }
   .market-cap {
-    min-width: 80px;
+    min-width: 40px;
     font-size: 9px;
   }
 }
