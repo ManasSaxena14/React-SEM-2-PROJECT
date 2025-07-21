@@ -1,54 +1,20 @@
-# Crypto X Tracker
+# CRYPTO X TRACKER
 
-A beginner-friendly cryptocurrency tracker built with React.js, Vite, and CoinGecko API.
-
-## Features
-- Real-time prices of top 20 cryptocurrencies by market cap
-- Search functionality to find any cryptocurrency from the API
-- Portfolio tracker (manual entry, localStorage persistence)
-- Historical price chart per coin
-- Crypto to fiat/crypto converter
-- Educational blog page
-- Static About page
+[Live Demo](https://crypto-x-tracker.netlify.app/)
 
 ## Tech Stack
-- React.js (with hooks)
+- React.js (Vite)
 - Context API
-- React Router (react-router-dom)
-- react-chartjs-2 & chart.js
-- CSS only
-- Vite
+- React Router DOM
+- CSS (Flexbox & Media Queries)
+- CoinGecko API
 
-## Getting Started
-1. Clone the repo
-2. Run `npm install`
-3. Run `npm run dev`
+## Key Features
+1. **Live Crypto Prices:** Track real-time prices for the top 15 digital assets.
+2. **Market Trend Analysis:** Visualize price changes and market trends with interactive charts.
+3. **Portfolio Management:** Add, monitor, and analyze your own crypto portfolio with instant P/L calculation.
+4. **Multi-Currency Support:** Instantly switch between USD, EUR, and INR for all data and portfolio values.
+5. **Responsive & Intuitive UI:** Enjoy a seamless experience on any device, from mobile to desktop.
 
-## Folder Structure
-```
-crypto-x-tracker/
-├── public/
-│   └── index.html
-├── src/
-│   ├── components/
-│   │   ├── Navbar/Navbar.jsx
-│   │   ├── Footer/Footer.jsx
-│   │   └── LineChart/LineChart.jsx
-│   ├── context/CoinContext.jsx
-│   ├── pages/
-│   │   ├── Home/Home.jsx
-│   │   ├── Portfolio/Portfolio.jsx
-│   │   ├── Coin/Coin.jsx
-│   │   ├── About/About.jsx + About.css
-│   │   └── Blog/Blog.jsx + Blog.css
-│   ├── App.jsx
-│   ├── main.jsx
-│   └── index.css
-├── package.json
-├── vite.config.js
-└── README.md
-```
-
-## API
-Powered by [CoinGecko API](https://www.coingecko.com/en/api).
-# React-SEM-2-PROJECT
+## About
+CRYPTO X TRACKER is your go-to crypto hub for live prices, trend analysis, and top asset tracking. With real-time data, curated insights, and powerful portfolio tools, it empowers both beginners and experienced traders to stay ahead in the fast-moving world of cryptocurrencies — all in one sleek, responsive dashboard.
