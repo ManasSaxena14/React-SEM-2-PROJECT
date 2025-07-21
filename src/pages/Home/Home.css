@@ -191,3 +191,31 @@ form button:hover {
     font-size: 9px;
   }
 }
+@media (min-width: 1000px) {
+  .crypto-table {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: start;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .table-layout {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 1fr 1.5fr;
+    align-items: center;
+    justify-items: start;
+    min-width: 700px;
+    font-size: 1.12rem;
+    padding: 18px 24px;
+  }
+  .table-layout > p, .table-layout > div {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+  }
+  .market-cap {
+    justify-content: flex-end;
+    text-align: right;
+  }
+}
