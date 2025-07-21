@@ -59,7 +59,9 @@ const Home = () => {
           "X" TRACKER
         </h1>
         <p>
-          Welcome to CRYPTO X TRACKER — your all-in-one crypto command center. Track live prices, dive into powerful insights, and analyze trends across the top 15 digital assets — all in real time.
+          Welcome to CRYPTO X TRACKER — your all-in-one crypto command center.<br/>
+          Track live prices, dive into powerful insights, and analyze trends across the top 15 digital assets — all in real time.<br/>
+          Discover curated market data, understand token performance, and build your own portfolio with precision. Whether you're a curious beginner or a seasoned trader, CRYPTO X TRACKER gives you the edge to navigate the crypto space confidently — all in one sleek, lightning-fast dashboard.
         </p>
         
         {error && (
