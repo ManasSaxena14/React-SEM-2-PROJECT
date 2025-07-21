@@ -16,9 +16,7 @@ const CoinContextProvider = (props) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Authentication functions
   const login = async (email, password) => {
-    // Simulate API call - in real app, this would be a backend call
     if (email && password) {
       const userData = { email, id: Date.now(), name: email.split('@')[0] };
       setUser(userData);
@@ -31,7 +29,6 @@ const CoinContextProvider = (props) => {
   };
 
   const register = async (email, password) => {
-    // Simulate API call - in real app, this would be a backend call
     if (email && password && password.length >= 6) {
       const userData = { email, id: Date.now(), name: email.split('@')[0] };
       setUser(userData);
@@ -49,7 +46,6 @@ const CoinContextProvider = (props) => {
     localStorage.removeItem('user');
   };
 
-  // Check for existing user on app load
   useEffect(() => {
     const savedUser = localStorage.getItem('user');
     if (savedUser) {
@@ -59,7 +55,6 @@ const CoinContextProvider = (props) => {
     }
   }, []);
 
-  // Fetch exchange rates with better error handling
   const fetchExchangeRates = async () => {
     try {
       const res = await fetch(
@@ -80,22 +75,17 @@ const CoinContextProvider = (props) => {
           inr: data.usd?.inr || 83.5,
         });
       } else {
-        // Use fallback rates if API fails
         console.warn('Exchange rates API failed, using fallback rates');
       }
     } catch (err) {
       console.warn('Exchange rates fetch failed:', err);
-      // Keep existing rates
     }
   };
 
-  // Convert all portfolio buyPrices to new currency
   const convertPortfolioCurrency = (newCurrency) => {
     setPortfolio((prevPortfolio) => {
       return prevPortfolio.map((entry) => {
-        // If entry already has buyCurrency, convert
         if (entry.buyCurrency && entry.buyCurrency !== newCurrency.name) {
-          // Convert buyPrice to USD first, then to new currency
           let buyPriceInUSD = entry.buyPrice;
     
           if (entry.buyCurrency === 'eur') buyPriceInUSD = entry.buyPrice / exchangeRates.eur;
@@ -105,7 +95,6 @@ const CoinContextProvider = (props) => {
           if (newCurrency.name === 'inr') newBuyPrice = buyPriceInUSD * exchangeRates.inr;
           return { ...entry, buyPrice: parseFloat(newBuyPrice.toFixed(6)), buyCurrency: newCurrency.name };
         } else if (!entry.buyCurrency) {
-          // If no buyCurrency, assume current context currency
           return { ...entry, buyCurrency: newCurrency.name };
         }
         return entry;
@@ -113,13 +102,11 @@ const CoinContextProvider = (props) => {
     });
   };
 
-  // Patch setCurrency to also convert portfolio
   const setCurrencyAndConvert = (newCurrency) => {
     setCurrency(newCurrency);
     convertPortfolioCurrency(newCurrency);
   };
 
-  // Only load portfolio from localStorage once, and never overwrite with empty
   useEffect(() => {
     if (portfolio.length === 0) {
       const saved = localStorage.getItem('portfolio');
@@ -131,7 +118,6 @@ const CoinContextProvider = (props) => {
     localStorage.setItem('portfolio', JSON.stringify(portfolio));
   }, [portfolio]);
 
-  // Sample data for fallback
   const getSampleData = (currencyName) => {
     const basePrices = {
       usd: { bitcoin: 43250, ethereum: 2650, tether: 1.0, bnb: 315, solana: 98 },
@@ -300,8 +286,7 @@ const CoinContextProvider = (props) => {
     setLoading(true);
     setError(null);
     
-    // Set a timeout for API calls to prevent hanging
-    const timeoutDuration = 10000; // 10 seconds
+    const timeoutDuration = 10000;
     
     try {
       const controller = new AbortController();
@@ -315,7 +300,6 @@ const CoinContextProvider = (props) => {
         signal: controller.signal,
       };
       
-      // Try to fetch top 20 coins for display
       const top20Response = await fetch(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}&order=market_cap_desc&per_page=20&page=1&sparkline=false&locale=en`,
         options
@@ -326,11 +310,9 @@ const CoinContextProvider = (props) => {
       if (top20Response.ok) {
         const top20Data = await top20Response.json();
         
-        // Validate that we got actual data
         if (top20Data && Array.isArray(top20Data) && top20Data.length > 0) {
           setAllCoins(top20Data);
           
-          // Try to fetch search data
           try {
             const searchResponse = await fetch(
               `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en`,
@@ -360,12 +342,10 @@ const CoinContextProvider = (props) => {
     } catch (err) {
       console.warn('API fetch failed, using sample data:', err);
       
-      // Always use fallback data when API fails
       const sampleData = getSampleData(currency.name);
       setAllCoins(sampleData);
       setSearchCoins(sampleData);
       
-      // Show user-friendly error message
       if (err.name === 'AbortError') {
         setError('API request timed out. Using demo data for now.');
       } else {
@@ -380,11 +360,10 @@ const CoinContextProvider = (props) => {
     fetchAllCoin();
     fetchExchangeRates();
     
-    // Add polling for live price updates and exchange rates
     const interval = setInterval(() => {
       fetchAllCoin();
       fetchExchangeRates();
-    }, 60000); // 60 seconds to avoid rate limits
+    }, 60000);
     
     return () => clearInterval(interval);
   }, [currency]);
