@@ -3,6 +3,7 @@ import "./Coin.css";
 import { useParams } from "react-router-dom";
 import { CoinContext } from "../../context/CoinContext";
 import LineChart from "../../components/LineChart/LineChart";
+import logo from "../../assets/logo.png";
 
 const Coin = () => {
   const { id: coinId } = useParams();
@@ -164,7 +165,7 @@ const Coin = () => {
     return (
       <div className="coin">
         <div className="coin-logo-center">
-          <img src={coinData.image?.large} alt={coinData.name} className="coin-logo-img" />
+          <img src={logo} alt={coinData.name} className="coin-logo-img" />
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 24 }}>
           {!portfolioEntry ? (
