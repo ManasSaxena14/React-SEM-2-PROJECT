@@ -9,12 +9,17 @@
 
 .login-card {
   background: var(--card);
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(121, 41, 255, 0.15);
+  padding: 32px 28px;
   width: 100%;
-  max-width: 400px;
+  max-width: 340px;
   border: 1px solid var(--border);
+  transition: transform 0.3s;
+}
+
+.login-card:hover {
+  transform: translateY(-4px);
 }
 
 .login-header {
@@ -23,7 +28,7 @@
 }
 
 .login-header h1 {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 900;
   color: var(--primary);
   text-shadow: 0 2px 16px #7929ff99, 0 1px 0 #fff;
@@ -33,42 +38,52 @@
 
 .login-header p {
   color: var(--text-muted);
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .form-group label {
   font-weight: 700;
   color: var(--text);
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 .form-group input {
-  padding: 12px 16px;
+  padding: 10px 16px;
   border-radius: 8px;
   border: 1.5px solid var(--border);
-  background: var(--bg-alt);
+  background: var(--bg);
   color: var(--text);
   font-size: 1rem;
-  font-weight: 600;
-  transition: border 0.2s;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  height: 42px;
+  box-sizing: border-box;
 }
 
 .form-group input:focus {
   border: 1.5px solid var(--primary);
   outline: none;
+  background: var(--bg-alt);
+}
+
+.form-group input::placeholder {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  opacity: 0.8;
 }
 
 .login-btn {
@@ -76,12 +91,12 @@
   color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 14px 24px;
-  font-size: 1.1rem;
+  padding: 12px;
+  font-size: 1.05rem;
   font-weight: 800;
   cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s;
-  margin-top: 8px;
+  transition: background 0.3s, box-shadow 0.3s;
+  margin-top: 6px;
 }
 
 .login-btn:hover {
@@ -109,36 +124,45 @@
 .login-footer p {
   color: var(--text-muted);
   font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .toggle-btn {
   background: none;
   border: none;
   color: var(--primary);
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
   text-decoration: underline;
   padding: 0;
-  margin: 0;
-  font-size: inherit;
+  font-size: 0.9rem;
 }
 
 .toggle-btn:hover {
   color: var(--accent);
-  background: none;
-  box-shadow: none;
 }
 
 @media (max-width: 600px) {
   .login-container {
     padding: 10px;
   }
-  
+
   .login-card {
     padding: 24px;
   }
-  
+
   .login-header h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
-} 
+
+  .form-group input {
+    padding: 9px 14px;
+    height: 40px;
+    font-size: 0.95rem;
+  }
+
+  .login-btn {
+    font-size: 1rem;
+    padding: 10px;
+  }
+}
