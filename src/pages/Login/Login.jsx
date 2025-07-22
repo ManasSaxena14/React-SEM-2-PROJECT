@@ -117,7 +117,7 @@ const Login = () => {
               autoComplete="new-password"
             />
             <button type="submit">Sign Up</button>
-          </form>
+        </form>
         )}
       </div>
     </div>
