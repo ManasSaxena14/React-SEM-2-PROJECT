@@ -1,99 +1,124 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { CoinContext } from '../../context/CoinContext';
+import React, { useState } from 'react';
 import './Login.css';
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
-  const [isLogin, setIsLogin] = useState(true);
+  const [activeTab, setActiveTab] = useState('login');
+  const [loginForm, setLoginForm] = useState({ email: '', password: '' });
+  const [signupForm, setSignupForm] = useState({ name: '', email: '', password: '', confirm: '' });
   const [error, setError] = useState('');
-  const { login, register } = useContext(CoinContext);
-  const navigate = useNavigate();
+  const [success, setSuccess] = useState('');
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-    setError(''); // Clear error when user types
+  const handleTab = (tab) => {
+    setActiveTab(tab);
+    setError('');
+    setSuccess('');
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-
-    try {
-      if (isLogin) {
-        await login(formData.email, formData.password);
-      } else {
-        await register(formData.email, formData.password);
-      }
-      navigate('/');
-    } catch (err) {
-      setError(err.message);
+  const handleChange = (e, formType) => {
+    const { name, value } = e.target;
+    if (formType === 'login') {
+      setLoginForm({ ...loginForm, [name]: value });
+    } else {
+      setSignupForm({ ...signupForm, [name]: value });
     }
   };
 
-  return (
-    <div className="login-container">
-      <div className="login-card">
-        <div className="login-header">
-          <h1>{isLogin ? 'Welcome Back' : 'Create Account'}</h1>
-          <p>{isLogin ? 'Sign in to your account' : 'Join CRYPTO X TRACKER'}</p>
-        </div>
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setError('');
+    setSuccess('');
+    if (!loginForm.email || !loginForm.password) {
+      setError('Please enter both email and password.');
+      return;
+    }
+    // Simulate login
+    setSuccess('Logged in successfully!');
+  };
 
-        <form onSubmit={handleSubmit} className="login-form">
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
+  const handleSignup = (e) => {
+    e.preventDefault();
+    setError('');
+    setSuccess('');
+    if (!signupForm.name || !signupForm.email || !signupForm.password || !signupForm.confirm) {
+      setError('Please fill all fields.');
+      return;
+    }
+    if (signupForm.password !== signupForm.confirm) {
+      setError('Passwords do not match.');
+      return;
+    }
+    // Simulate signup
+    setSuccess('Account created! You can now log in.');
+    setActiveTab('login');
+    setSignupForm({ name: '', email: '', password: '', confirm: '' });
+  };
+
+  return (
+    <div className="auth-container">
+      <div className="auth-card">
+        <div className="auth-tabs">
+          <button className={activeTab === 'login' ? 'active' : ''} onClick={() => handleTab('login')}>Login</button>
+          <button className={activeTab === 'signup' ? 'active' : ''} onClick={() => handleTab('signup')}>Sign Up</button>
+        </div>
+        {error && <div className="auth-error">{error}</div>}
+        {success && <div className="auth-success">{success}</div>}
+        {activeTab === 'login' ? (
+          <form className="auth-form" onSubmit={handleLogin} autoComplete="off">
             <input
               type="email"
-              id="email"
               name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Enter your email"
-              required
+              placeholder="Email"
+              value={loginForm.email}
+              onChange={(e) => handleChange(e, 'login')}
+              autoComplete="username"
             />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
             <input
               type="password"
-              id="password"
               name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter your password"
-              required
+              placeholder="Password"
+              value={loginForm.password}
+              onChange={(e) => handleChange(e, 'login')}
+              autoComplete="current-password"
             />
-          </div>
-
-          {error && <div className="error-message">{error}</div>}
-
-          <button type="submit" className="login-btn">
-            {isLogin ? 'Sign In' : 'Create Account'}
-          </button>
-        </form>
-
-        <div className="login-footer">
-          <p>
-            {isLogin ? "Don't have an account? " : "Already have an account? "}
-            <button
-              className="toggle-btn"
-              onClick={() => {
-                setIsLogin(!isLogin);
-                setError('');
-                setFormData({ email: '', password: '' });
-              }}
-            >
-              {isLogin ? 'Sign Up' : 'Sign In'}
-            </button>
-          </p>
-        </div>
+            <button type="submit">Login</button>
+          </form>
+        ) : (
+          <form className="auth-form" onSubmit={handleSignup} autoComplete="off">
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              value={signupForm.name}
+              onChange={(e) => handleChange(e, 'signup')}
+              autoComplete="name"
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={signupForm.email}
+              onChange={(e) => handleChange(e, 'signup')}
+              autoComplete="email"
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={signupForm.password}
+              onChange={(e) => handleChange(e, 'signup')}
+              autoComplete="new-password"
+            />
+            <input
+              type="password"
+              name="confirm"
+              placeholder="Confirm Password"
+              value={signupForm.confirm}
+              onChange={(e) => handleChange(e, 'signup')}
+              autoComplete="new-password"
+            />
+            <button type="submit">Sign Up</button>
+          </form>
+        )}
       </div>
     </div>
   );
