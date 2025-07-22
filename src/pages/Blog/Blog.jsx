@@ -8,42 +8,41 @@ const Blog = () => {
         <img src="https://images.unsplash.com/photo-1640161704729-cbe966a08476?q=80&w=2344&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Crypto concept 1" className="blog-hero-img" />
         <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Crypto concept 2" className="blog-hero-img" />
       </div>
-      <h1>📚 Beginner Guides & Tutorials</h1>
+      <h1><strong>Crypto X Tracker Blog</strong></h1>
       <p>
-        Whether you're new to crypto or brushing up your skills, our tutorials walk you through the fundamentals and latest market trends in simple language.
+        Welcome to the Crypto X Tracker Blog! Here, you'll find beginner-friendly guides and insightful tutorials to help you navigate the world of cryptocurrencies. Our goal is to make complex crypto topics easy to understand for everyone.
       </p>
 
-      <h2>🔍 Crypto Concepts Explained Simply</h2>
+      <h2><strong>Understanding Cryptocurrency</strong></h2>
       <p>
-        Dive into core blockchain and crypto topics like wallets, DeFi, NFTs, and smart contracts — all broken down into clear, concise insights.
+        Cryptocurrency is a digital or virtual currency that uses cryptography for security. Unlike traditional money, cryptocurrencies operate on decentralized networks based on blockchain technology. This means transactions are transparent, secure, and not controlled by any single authority.
       </p>
 
-      <h2>🔗 What is Blockchain?</h2>
+      <h2><strong>How Blockchain Works</strong></h2>
       <p>
-        Blockchain is a decentralized digital ledger that records transactions across a network of computers. Unlike traditional databases managed by a single authority (like a bank), blockchain is transparent and tamper-resistant. Every transaction is added as a "block" to a chronological chain — hence the name. This technology powers cryptocurrencies like Bitcoin and Ethereum, enabling secure, peer-to-peer value exchange without middlemen.
+        Blockchain is a distributed ledger that records all transactions across a network of computers. Each block contains a list of transactions, and once a block is added to the chain, the information is permanent and cannot be altered. This technology is the backbone of most cryptocurrencies, ensuring trust and transparency.
       </p>
 
-      <h2>👛 What is a Crypto Wallet?</h2>
+      <h2><strong>Crypto Wallets</strong></h2>
       <p>
-        A crypto wallet is a tool that allows users to store, send, and receive cryptocurrencies. There are two main types: hot wallets (online and easy to access) and cold wallets (offline and more secure). Your wallet doesn’t store coins directly — it stores your private keys, which give access to your crypto on the blockchain. Protecting your private key is critical — anyone with it can control your assets.
+        A crypto wallet allows you to store, send, and receive digital assets. There are two main types: hot wallets (connected to the internet) and cold wallets (offline for extra security). Always keep your private keys safe, as they are the only way to access your funds.
       </p>
 
-      <h2>🏦 What is DeFi (Decentralized Finance)?</h2>
+      <h2><strong>DeFi: Decentralized Finance</strong></h2>
       <p>
-        DeFi refers to financial systems built on blockchain that remove intermediaries like banks and brokers. Using smart contracts, DeFi platforms offer services such as lending, borrowing, trading, and saving — without requiring permission or centralized control. It's finance for everyone, running 24/7, with full transparency.
+        DeFi is a movement that leverages blockchain technology to recreate and improve traditional financial systems like lending, borrowing, and trading—without intermediaries. DeFi platforms are open to everyone and operate around the clock, providing greater accessibility and transparency.
       </p>
 
-      <h2>🤖 What is a Smart Contract?</h2>
+      <h2><strong>Smart Contracts</strong></h2>
       <p>
-        A smart contract is a self-executing program stored on the blockchain that runs when specific conditions are met. Think of it like an “if-this-then-that” agreement, but without a middleman. They're used in DeFi, NFT sales, and many blockchain apps to automate transactions with security and trust.
+        Smart contracts are self-executing agreements with the terms directly written into code. They automatically execute actions when predefined conditions are met, removing the need for a third party. Smart contracts are widely used in DeFi, NFTs, and many blockchain applications.
       </p>
 
       <p className="author-signature">
-        ✍️ Made by Manas Saxena | Written by Manas
+        "Made by Manas Saxena | Written by Manas"
       </p>
     </div>
   );
 };
 
 export default Blog;
-
