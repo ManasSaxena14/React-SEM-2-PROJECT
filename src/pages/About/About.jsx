@@ -22,8 +22,8 @@ const About = () => {
         <img src="https://assets.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970" alt="BNB" />
         <img src="https://assets.coingecko.com/coins/images/4128/large/solana.png?1696502016" alt="Solana" />
         <img src="https://assets.coingecko.com/coins/images/325/large/Tether.png?1696501661" alt="Tether" />
-        <img src="https://assets.coingecko.com/coins/images/975/large/Cardano.png?1696502090" alt="Cardano" />
         <img src="https://assets.coingecko.com/coins/images/5/large/dogecoin.png?1696501409" alt="Dogecoin" />
+        <img src="https://assets.coingecko.com/coins/images/1094/large/tron-logo.png?1696502193" alt="Tron" />
       </div>
 
       <section className="features-section">
