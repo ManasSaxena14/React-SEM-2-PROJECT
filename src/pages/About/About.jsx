@@ -8,7 +8,7 @@ const About = () => {
         alt="Bitcoin digital concept hero"
         className="about-hero-img"
       />
-      <h1>About CRYPTO "X" PULSE</h1>
+      <h1><strong>About CRYPTO "X" PULSE</strong></h1>
 
       <p className="intro">
         CRYPTO "X" PULSE is your ultimate companion in the fast-paced world of cryptocurrencies.
@@ -22,21 +22,23 @@ const About = () => {
         <img src="https://assets.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970" alt="BNB" />
         <img src="https://assets.coingecko.com/coins/images/4128/large/solana.png?1696502016" alt="Solana" />
         <img src="https://assets.coingecko.com/coins/images/325/large/Tether.png?1696501661" alt="Tether" />
+        <img src="https://assets.coingecko.com/coins/images/975/large/Cardano.png?1696502090" alt="Cardano" />
+        <img src="https://assets.coingecko.com/coins/images/5/large/dogecoin.png?1696501409" alt="Dogecoin" />
       </div>
 
       <section className="features-section">
-        <h2>Key Features</h2>
+        <h2><strong>Key Features</strong></h2>
         <ul className="features-list">
-          <li>🌐 Extensive coverage of all major cryptocurrencies and tokens</li>
-          <li>⚡ Live price tracking with low latency and real-time updates</li>
-          <li>📈 Interactive charts and historical data for deep market analysis</li>
-          <li>🎯 User-friendly and modern UI designed for seamless navigation</li>
-          <li>🔒 Secure and privacy-focused platform with no unnecessary data collection</li>
-          <li>📱 Fully responsive design for perfect experience on any device</li>
-          <li>💡 Educational resources and insights to help beginners and pros alike</li>
-          <li>🎓 Beginner-friendly guides and intuitive features for new users</li>
-          <li>🔍 Reliable, accurate, and up-to-date market data you can trust</li>
-          <li>⚙️ Optimized for low latency and smooth performance on all devices</li>
+          <li><strong>Extensive coverage</strong> of all major cryptocurrencies and tokens</li>
+          <li><strong>Live price tracking</strong> with low latency and real-time updates</li>
+          <li><strong>Interactive charts</strong> and historical data for deep market analysis</li>
+          <li><strong>User-friendly UI</strong> designed for seamless navigation</li>
+          <li><strong>Secure & private</strong> platform with no unnecessary data collection</li>
+          <li><strong>Fully responsive design</strong> for perfect experience on any device</li>
+          <li><strong>Educational resources</strong> and insights for beginners and pros alike</li>
+          <li><strong>Beginner-friendly guides</strong> and intuitive features for new users</li>
+          <li><strong>Accurate & up-to-date market data</strong> you can trust</li>
+          <li><strong>Optimized performance</strong> for low latency on all devices</li>
         </ul>
       </section>
 
