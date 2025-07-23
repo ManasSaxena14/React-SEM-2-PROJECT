@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { CoinContext } from '../../context/CoinContext';
 import './Login.css';
 
 const Login = () => {
@@ -7,6 +9,15 @@ const Login = () => {
   const [signupForm, setSignupForm] = useState({ name: '', email: '', password: '', confirm: '' });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
+  const { login, register, isAuthenticated } = useContext(CoinContext);
+
+  useEffect(() => {
+    // If already logged in, redirect to home
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleTab = (tab) => {
     setActiveTab(tab);
@@ -23,7 +34,7 @@ const Login = () => {
     }
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
@@ -31,11 +42,18 @@ const Login = () => {
       setError('Please enter both email and password.');
       return;
     }
-    // Simulate login
-    setSuccess('Logged in successfully!');
+    try {
+      await login(loginForm.email, loginForm.password);
+      setSuccess('Logged in successfully!');
+      setTimeout(() => {
+        navigate('/');
+      }, 1000);
+    } catch (err) {
+      setError(err.message || 'Login failed.');
+    }
   };
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
@@ -47,10 +65,14 @@ const Login = () => {
       setError('Passwords do not match.');
       return;
     }
-    // Simulate signup
-    setSuccess('Account created! You can now log in.');
-    setActiveTab('login');
-    setSignupForm({ name: '', email: '', password: '', confirm: '' });
+    try {
+      await register(signupForm.email, signupForm.password);
+      setSuccess('Account created! You can now log in.');
+      setActiveTab('login');
+      setSignupForm({ name: '', email: '', password: '', confirm: '' });
+    } catch (err) {
+      setError(err.message || 'Signup failed.');
+    }
   };
 
   return (
