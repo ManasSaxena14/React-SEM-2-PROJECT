@@ -6,7 +6,7 @@
 
 ---
 
-## 📋 Problem Statement & Solution
+##  Problem Statement & Solution
 
 **Problem:** Cryptocurrency investors and enthusiasts need a centralized platform to track real-time prices, analyze market trends, and manage their portfolios across multiple currencies — all without the complexity of traditional trading platforms.
 
@@ -14,40 +14,9 @@
 
 ---
 
-## 🏗️ Architecture
-
-┌─────────────┐
-│   Browser   │
-└──────┬──────┘
-       │
-       ▼
-┌─────────────────────────────────────┐
-│        React Application            │
-│  ┌──────────────────────────────┐  │
-│  │   Components Layer           │  │
-│  │  • Navbar, Footer, Charts    │  │
-│  └──────────────────────────────┘  │
-│  ┌──────────────────────────────┐  │
-│  │   Pages Layer                │  │
-│  │  • Home, Portfolio, Coin     │  │
-│  │  • About, Blog, Login        │  │
-│  └──────────────────────────────┘  │
-│  ┌──────────────────────────────┐  │
-│  │   Context API (State)        │  │
-│  │  • CoinContext               │  │
-│  │  • Portfolio Management      │  │
-│  │  • Auth State                │  │
-│  └──────────────────────────────┘  │
-└─────────────┬───────────────────────┘
-              │
-              ▼
-      ┌───────────────┐
-      │  CoinGecko    │
-      │     API       │
-      └───────────────┘
 
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### **Frontend Framework**
 - **React 19.1.0** - Modern UI library with hooks and functional components
@@ -78,7 +47,7 @@
 
 ---
 
-## ✨ Features
+##  Features
 
 - [x] **Live Cryptocurrency Prices** - Track real-time prices for top 20 digital assets
 - [x] **Market Trend Visualization** - Interactive charts showing price changes and trends
@@ -98,7 +67,7 @@
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Setup and Installation
 
@@ -129,7 +98,7 @@
    
    The app will open at `http://localhost:5173`
 
-## 🌐 Deployment
+##  Deployment
 
 This project is deployed on **Netlify** with continuous deployment from the main branch.
 
@@ -194,7 +163,7 @@ Crypto-X-Tracker/
 ---
 
 
-## 📸 Screenshots
+##  Screenshots
 
 ![Live Demo](https://crypto-x-tracker.netlify.app/)
 
